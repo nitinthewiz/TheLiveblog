@@ -30,7 +30,7 @@
 
 		if ($pass == 'YOURSUPERSECRETPASSWORDHERE'){
 			reset($wp_comments);
-			if ($wp_comments == FALSE){
+			if ($results == FALSE){
 				$itemID = 1	
 			}
 			else{
