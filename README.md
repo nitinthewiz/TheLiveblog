@@ -13,9 +13,9 @@ Requirements
 What it is and what it does
 ===========================
 
-  This is a very simple liveblog. It posts to itself (sample at [Nitin Khanna's Liveblog](http://liveblog.nitinkhanna.com/) ) and to twitter and ADN. 
-  It's not fancy, but it works. Beware, it's very easily hackable so make sure the passphrase you setup is strong. 
-  If a post is >140 chars, it truncates to 75 chars and adds your liveblog link to the end. Same for ADN (truncates to 190 chars) 
+  This is a very simple liveblog. It posts to itself (sample at [Nitin Khanna's Liveblog](http://liveblog.nitinkhanna.com/) ) and to twitter and ADN.  
+  It's not fancy, but it works. Beware, it's very easily hackable so make sure the passphrase you setup is strong.  
+  If a post is >140 chars, it truncates to 75 chars and adds your liveblog link to the end. Same for ADN (truncates to 190 chars)  
 
 
 Setup
