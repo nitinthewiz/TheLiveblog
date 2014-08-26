@@ -41,7 +41,14 @@ Setup
     5. TWITTERUSERTOKEN, TWITTERUSERTOKENSECRET  
     6. YOURTIMEZONEHERE - Mine's America/Denver  
     7. YOURNAMEHERE - This is your name. Hi. Mine's Nitin Khanna  
-
+    
+  
+How to use
+==========
+  Now that you've setup the files, upload them to your server (if you've not already done that) and open yoursite.com/create.php and bookmark this.   
+  The first field is your post and the second, smaller field is the passphrase.   
+  Fill both and hit submit. If the post goes through, you'll see the words "Array" and the postID (it'll start with 1).   
+  If it fails, well bupkis.  
 
 Issues
 ======
