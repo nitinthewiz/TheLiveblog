@@ -49,6 +49,7 @@ How to use
   The first field is your post and the second, smaller field is the passphrase.   
   Fill both and hit submit. If the post goes through, you'll see the words "Array" and the postID (it'll start with 1).   
   If it fails, well bupkis.  
+  The posts will be displayed on yoursite.com   
 
 Issues
 ======
