@@ -13,7 +13,7 @@ Requirements
 What it is and what it does
 ===========================
 
-  This is a very simple liveblog. It posts to itself (sample at [Nitin Khanna's Liveblog](http://liveblog.nitinkhanna.com/) ) and to twitter and ADN.  
+  This is a very simple liveblog. It posts to itself (sample at [Nitin Khanna's Liveblog](http://liveblog.nitinkhanna.com/) ) and to Twitter / ADN.  
   It's not fancy, but it works. Beware, it's very easily hackable so make sure the passphrase you setup is strong.  
   If a post is >140 chars, it truncates to 75 chars and adds your liveblog link to the end. Same for ADN (truncates to 190 chars)  
 
@@ -36,7 +36,7 @@ Setup
   In create.php -  
     1. YOURSUPERSECRETPASSWORDHERE - This is your passphrase to save things. This is your last line of defence. Make it snazzy.  
     2. YOURLIVEBLOGHERE.COM  
-    3. ADNACCESSTOKENHERE - Setup an ADN app for free at [ADN Developer's Site](developers.app.net) and then generate an access token for your app  
+    3. ADNACCESSTOKENHERE - Setup an ADN app for free at [ADN Developer's Site](http://developers.app.net) and then generate an access token for your app  
     4. TWITTERAPIKEY, TWITTERAPISECRET  
     5. TWITTERUSERTOKEN, TWITTERUSERTOKENSECRET  
     6. YOURTIMEZONEHERE - Mine's America/Denver  
