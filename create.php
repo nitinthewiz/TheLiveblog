@@ -31,7 +31,7 @@
 		if ($pass == 'YOURSUPERSECRETPASSWORDHERE'){
 			reset($wp_comments);
 			if ($results == FALSE){
-				$itemID = 1	
+				$itemID = 1;	
 			}
 			else{
 				$item = array_values($wp_comments)[0];
