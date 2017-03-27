@@ -110,19 +110,19 @@
 			
 			// ADN PART STARTS
 
-			$ADNtext = str_replace("\'", "'", $ADNtext);
-			$ADNtext = str_replace("\&quot;", "\"", $ADNtext);
-			$ADNtext = urlencode($ADNtext);
+// 			$ADNtext = str_replace("\'", "'", $ADNtext);
+// 			$ADNtext = str_replace("\&quot;", "\"", $ADNtext);
+// 			$ADNtext = urlencode($ADNtext);
 
-			$data = array(
-			   "text" => $ADNtext,
-			   "access_token" => "ADNACCESSTOKENHERE"
-			);
+// 			$data = array(
+// 			   "text" => $ADNtext,
+// 			   "access_token" => "ADNACCESSTOKENHERE"
+// 			);
 
-			$the_result = post_to_url('https://alpha-api.app.net/stream/0/posts',$data);
+// 			$the_result = post_to_url('https://alpha-api.app.net/stream/0/posts',$data);
 			
-			$the_result = preg_replace( "/\n/", "", $the_result);
-			$the_Array = json_decode($the_result,true);
+// 			$the_result = preg_replace( "/\n/", "", $the_result);
+// 			$the_Array = json_decode($the_result,true);
 			
 			// ADN PART OVER
 			
