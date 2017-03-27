@@ -50,7 +50,8 @@ $results = file_get_contents('text.txt');
 			
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
-				echo "<tr><td rowspan='2' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='http://YOURLIVEBLOGHERE.COM#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr><tr><td><button type=\"button\" class=\"btn btn-default btn-xs\" onclick=\"toADN(".$livepost['comment_ID'].")\">Share To ADN</button><button type=\"button\" class=\"btn btn-info btn-xs\" onclick=\"toTw(".$livepost['comment_ID'].")\">Tweet this!</button></td></tr>";
+				echo "<tr><td rowspan='2' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='http://liveblog.nitinkhanna.com#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr><tr><td><button type=\"button\" class=\"btn btn-info btn-xs\" onclick=\"toTw(".$livepost['comment_ID'].")\">Tweet this!</button></td></tr>"; 
+				// echo "<tr><td rowspan='2' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='http://YOURLIVEBLOGHERE.COM#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr><tr><td><button type=\"button\" class=\"btn btn-default btn-xs\" onclick=\"toADN(".$livepost['comment_ID'].")\">Share To ADN</button><button type=\"button\" class=\"btn btn-info btn-xs\" onclick=\"toTw(".$livepost['comment_ID'].")\">Tweet this!</button></td></tr>";
 			?>
 			</tbody>
 		</table>
