@@ -30,16 +30,18 @@ Setup
 
   Find and replace the following -  
   
-  In index.php -   
+  In index.php -
+  
     1. YOURLIVEBLOGHERE.COM - with your sitename.  
     2. YOURADNUSERNAMEHERE  (Ignore if you want to. This function will not get fired now)
     3. YOURTWITTERUSERNAMEHERE  
     4. YOURLiveblogTITLEHERE  
 
-  In create.php -  
+  In create.php -
+  
     1. YOURSUPERSECRETPASSWORDHERE - This is your passphrase to save things. This is your last line of defence. Make it snazzy.  
     2. YOURLIVEBLOGHERE.COM  
-    3. ~~ADNACCESSTOKENHERE - Setup an ADN app for free at [ADN Developer's Site](http://developers.app.net) and then generate an access token for your app () ~~
+    3. ~~ADNACCESSTOKENHERE - Setup an ADN app for free at [ADN Developer's Site](http://developers.app.net) and then generate an access token for your app ()~~
     4. TWITTERAPIKEY, TWITTERAPISECRET  
     5. TWITTERUSERTOKEN, TWITTERUSERTOKENSECRET  
     6. YOURTIMEZONEHERE - Mine's America/Vancouver. This is based on PHP timezones which is from the list [here](http://php.net/manual/en/timezones.php)
