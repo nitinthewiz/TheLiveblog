@@ -104,7 +104,7 @@
 
 			$Knowntext = str_replace("\&quot;", "\"", $text);
 
-			$result = statusKnown('YOURKNOWNUSERNAME', 'YOURSUPERSECRETKNOWNAPIKEY', 'YOURKNOWNUSERNAME', $Knowntext);
+			$result = statusKnown('YOURKNOWNUSERNAME', 'YOURSUPERSECRETKNOWNAPIKEY', 'YOURTWITTERUSERNAME', $Knowntext);
 
 			// Known part over
 			
