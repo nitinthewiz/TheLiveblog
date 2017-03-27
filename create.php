@@ -64,7 +64,7 @@
 			$comment_id = strval($itemID);
 			
 			// Change the line below to your timezone!
-			date_default_timezone_set('YOURTIMEZONEHERE'); // Mine's America/Denver
+			date_default_timezone_set('YOURTIMEZONEHERE'); // Mine's America/Vancouver
 			$date = date('Y-m-d H:i:s', time());
 
 			$postarray = array(
