@@ -25,8 +25,8 @@ Setup
     ~~1. ADN access token.  ~~(ADN is dead. Long live ADN)
  
     2. Twitter consumer key and token. 
-    3. 10Centuries API key
-    4. Withknown API key
+    3. 10Centuries API key 
+    4. Withknown API key 
 
   Find and replace the following -  
   
