@@ -1,5 +1,7 @@
 <?php
 
+	include 'known.php';
+
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
 
@@ -21,6 +23,27 @@
 
 		   curl_close($post);
 		   return $result;
+	}
+
+	function post_to_tenC($url, $data) {
+		$fields = '';
+		foreach($data as $key => $value) { 
+			$fields .= $key . '=' . $value . '&'; 
+		}
+		rtrim($fields, '&');
+
+		$post = curl_init();
+
+		curl_setopt($post, CURLOPT_URL, $url);
+		curl_setopt($post, CURLOPT_POST, count($data));
+		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
+		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded", "Authorization: YOURFANCYPANTSAUTHTOKENHERE"));
+
+		$result = curl_exec($post);
+
+		curl_close($post);
+		return $result;
 	}
 	
 	if(isset($_POST['submit'])) {
@@ -55,6 +78,8 @@
 			$result = var_export($wp_comments, true); 
 			file_put_contents('text.txt', $result);
 
+			// Length setting part starts
+			
 			if (strlen($text) > 256){
 				$ADNURL = 'http://YOURLIVEBLOGHERE.COM#'.$comment_id;
 				$ADNtext = substr($text, 0, 190);
@@ -72,6 +97,18 @@
 			else{
 				$Twtext = $text;
 			}
+			
+			// Length setting part over
+			
+			// Known part starts
+
+			$Knowntext = str_replace("\&quot;", "\"", $text);
+
+			$result = statusKnown('YOURKNOWNUSERNAME', 'YOURSUPERSECRETKNOWNAPIKEY', 'YOURKNOWNUSERNAME', $Knowntext);
+
+			// Known part over
+			
+			// ADN PART STARTS
 
 			$ADNtext = str_replace("\'", "'", $ADNtext);
 			$ADNtext = str_replace("\&quot;", "\"", $ADNtext);
@@ -86,6 +123,29 @@
 			
 			$the_result = preg_replace( "/\n/", "", $the_result);
 			$the_Array = json_decode($the_result,true);
+			
+			// ADN PART OVER
+			
+			// 10Centuries PART STARTS
+
+			$TenCtext = str_replace("\'", "'", $text);
+			$TenCtext = str_replace("\&quot;", "\"", $TenCtext);
+			$TenCtext = urlencode($TenCtext);
+
+			$data = array(
+				"content" => $TenCtext,
+			);
+
+			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $data);
+			
+			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
+			$the_Array_10c = json_decode($the_result_10c,true);
+
+			print_r($the_Array_10c);
+
+			// 10Centuries PART OVER
+			
+			// Twitter part starts
 
 			require_once('codebird.php');
 			 
@@ -98,6 +158,8 @@
 			);
 			$reply = $cb->statuses_update($params);
 			echo $reply;
+			
+			// Twitter part Over
 		}
 	}
 ?>
