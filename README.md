@@ -1,7 +1,7 @@
 TheLiveblog
 ===========
 
-  A simple liveblog using PHP that posts to itself, ADN and Twitter at the same time. Very rude, very hackable. Beware.
+  A simple liveblog using PHP that posts to itself, ADN, withKnown, 10Centuries, and Twitter at the same time. Very rude, very hackable. Beware.
 
 Requirements
 ============
