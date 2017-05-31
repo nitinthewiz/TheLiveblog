@@ -48,6 +48,12 @@ Setup
   7. YOURNAMEHERE - This is your name. Hi. Mine's Nitin Khanna  
   8. YOURFANCYPANTSAUTHTOKENHERE - This is your 10Centuries Auth token. Refer [here](https://pinboard.in/u:larand/t:10Centuries/) to see how to generate it.
   9. YOURKNOWNUSERNAME, YOURSUPERSECRETKNOWNAPIKEY, YOURTWITTERUSERNAME - This is your Known Username, your Known API key (user withknown dev docs to find how to get it. I forget), and your twitter username. The idea is that you can get known to post to twitter for you. There is a limitation here, I believe, that without your twitter username this function won't work. I haven't tested it without the twitter username. Left to reader as exercise.
+  
+  In rss.php - 
+  
+  1. YOURLiveblogTITLEHERE
+  2. YOURLiveblogDESCRIPTIONHERE
+  3. YOURLIVEBLOGHERE.COM - make sure *not* to remove the '#' after the url. This hash helps point to the right post when someone comes directly to a post on your liveblog. For [example](http://liveblog.nitinkhanna.com/#30). Also, this has to be done twice, for link and guid. GUID is an optional field, but it helps in posting to the micro.blog service. 
     
   
 How to use
