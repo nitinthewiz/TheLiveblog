@@ -8,6 +8,7 @@ $results = file_get_contents('text.txt');
 <head>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+	<link rel="alternate" type="application/rss+xml" title="YOURLiveblogTITLEHERE" href="/rss.php">
 	<script type="text/javascript">
 		function toADN(comment_ID){
 			var text = document.getElementById(comment_ID).innerHTML;
