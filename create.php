@@ -45,6 +45,28 @@
 		curl_close($post);
 		return $result;
 	}
+
+	function ping_micro_blog() {
+		$fields = '';
+		// foreach($data as $key => $value) { 
+		// 	$fields .= $key . '=' . $value . '&'; 
+		// }
+		$fields .= "url" . '=' . "http://YOURLIVEBLOGHERE.COM/rss.php" . '&'; 
+		rtrim($fields, '&');
+
+		$post = curl_init();
+
+		curl_setopt($post, CURLOPT_URL, "http://micro.blog/ping");
+		// curl_setopt($post, CURLOPT_POST, count($data));
+		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
+		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded"));
+
+		$result = curl_exec($post);
+
+		curl_close($post);
+		return $result;
+	}
 	
 	if(isset($_POST['submit'])) {
 
@@ -160,6 +182,12 @@
 			echo $reply;
 			
 			// Twitter part Over
+			
+			// ping microblog
+
+			ping_micro_blog();
+
+			// ping micrblog over
 		}
 	}
 ?>
