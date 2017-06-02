@@ -75,6 +75,12 @@
 
 		if ($pass == 'YOURSUPERSECRETPASSWORDHERE'){
 			reset($wp_comments);
+			
+			$errors = array_filter($wp_comments);
+			if (empty($errors)) {
+				$wp_comments = array();
+			}
+			
 			if ($results == FALSE){
 				$itemID = 1;	
 			}
