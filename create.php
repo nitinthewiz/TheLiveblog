@@ -96,7 +96,7 @@
 			$date = date('Y-m-d H:i:s', time());
 
 			$postarray = array(
-				'comment_author' => $configs->userName',
+				'comment_author' => $configs->userName,
 				'comment_date' => $date,
 				'comment_content' => $text,
 				'comment_ID' => $comment_id
