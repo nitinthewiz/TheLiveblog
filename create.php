@@ -51,7 +51,7 @@
 		// foreach($data as $key => $value) { 
 		// 	$fields .= $key . '=' . $value . '&'; 
 		// }
-		$fields .= "url" . '=' . "http://<?= $configs->siteUrl ?>/rss.php" . '&'; 
+		$fields .= "url" . '=' . "http://".$configs->siteUrl."/rss.php" . '&'; 
 		rtrim($fields, '&');
 
 		$post = curl_init();
@@ -73,7 +73,7 @@
 		$text = $_POST['something'];
 		$pass = $_POST['nothing'];
 
-		if ($pass == '<?= $configs->password ?>'){
+		if ($pass == $configs->password){
 			reset($wp_comments);
 			
 			$errors = array_filter($wp_comments);
@@ -92,11 +92,11 @@
 			$comment_id = strval($itemID);
 			
 			// Change the line below to your timezone!
-			date_default_timezone_set('<?= $configs->timezone ?>');
+			date_default_timezone_set( $configs->timezone);
 			$date = date('Y-m-d H:i:s', time());
 
 			$postarray = array(
-				'comment_author' => 'YOURNAMEHERE',
+				'comment_author' => $configs->userName',
 				'comment_date' => $date,
 				'comment_content' => $text,
 				'comment_ID' => $comment_id
@@ -109,7 +109,7 @@
 			// Length setting part starts
 			
 			if (strlen($text) > 256){
-				$ADNURL = 'http://<?= $configs->siteUrl ?>#'.$comment_id;
+				$ADNURL = 'http://'.$configs->siteUrl.'#'.$comment_id;
 				$ADNtext = substr($text, 0, 190);
 				$ADNtext = $ADNtext.'... '.$ADNURL;
 			}
@@ -118,7 +118,7 @@
 			}
 
 			if (strlen($text) > 140){
-				$TwURL = 'http://<?= $configs->siteUrl ?>#'.$comment_id;
+				$TwURL = 'http://'. $configs->siteUrl.'#'.$comment_id;
 				$Twtext = substr($text, 0, 75);
 				$Twtext = $Twtext.'... '.$TwURL;
 			}
@@ -132,7 +132,7 @@
 
 			$Knowntext = str_replace("\&quot;", "\"", $text);
 
-			$result = statusKnown('<?= $configs->knownUser ?>', '<?= $configs->knownAPIkey ?>', '<?= $configs->knownTwName ?>', $Knowntext);
+			$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $Knowntext);
 
 			// Known part over
 			
@@ -177,9 +177,9 @@
 
 			require_once('codebird.php');
 			 
-			\Codebird\Codebird::setConsumerKey("<?= $configs->twAPIkey ?>", "<?= $configs->twAPIsecret ?>");
+			\Codebird\Codebird::setConsumerKey( $configs->twAPIkey, $configs->twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken("<?= $configs->twUserKey ?>", "<?= $configs->twUserSecret ?>");
+			$cb->setToken($configs->twUserKey, $configs->twUserSecret);
 			 
 			$params = array(
 			  'status' => $Twtext
