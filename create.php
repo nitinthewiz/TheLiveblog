@@ -1,7 +1,7 @@
 <?php
 
 	include 'known.php';
-
+	$configs = include('configs.php');
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
 
@@ -38,7 +38,7 @@
 		curl_setopt($post, CURLOPT_POST, count($data));
 		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
 		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded", "Authorization: YOURFANCYPANTSAUTHTOKENHERE"));
+		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded", "Authorization: <?= $configs->tenCauthtoken ?>"));
 
 		$result = curl_exec($post);
 
@@ -51,7 +51,7 @@
 		// foreach($data as $key => $value) { 
 		// 	$fields .= $key . '=' . $value . '&'; 
 		// }
-		$fields .= "url" . '=' . "http://YOURLIVEBLOGHERE.COM/rss.php" . '&'; 
+		$fields .= "url" . '=' . "http://<?= $configs->siteUrl ?>/rss.php" . '&'; 
 		rtrim($fields, '&');
 
 		$post = curl_init();
@@ -73,7 +73,7 @@
 		$text = $_POST['something'];
 		$pass = $_POST['nothing'];
 
-		if ($pass == 'YOURSUPERSECRETPASSWORDHERE'){
+		if ($pass == '<?= $configs->password ?>'){
 			reset($wp_comments);
 			
 			$errors = array_filter($wp_comments);
@@ -92,7 +92,7 @@
 			$comment_id = strval($itemID);
 			
 			// Change the line below to your timezone!
-			date_default_timezone_set('YOURTIMEZONEHERE'); // Mine's America/Vancouver
+			date_default_timezone_set('<?= $configs->timezone ?>');
 			$date = date('Y-m-d H:i:s', time());
 
 			$postarray = array(
@@ -109,7 +109,7 @@
 			// Length setting part starts
 			
 			if (strlen($text) > 256){
-				$ADNURL = 'http://YOURLIVEBLOGHERE.COM#'.$comment_id;
+				$ADNURL = 'http://<?= $configs->siteUrl ?>#'.$comment_id;
 				$ADNtext = substr($text, 0, 190);
 				$ADNtext = $ADNtext.'... '.$ADNURL;
 			}
@@ -118,7 +118,7 @@
 			}
 
 			if (strlen($text) > 140){
-				$TwURL = 'http://YOURLIVEBLOGHERE.COM#'.$comment_id;
+				$TwURL = 'http://<?= $configs->siteUrl ?>#'.$comment_id;
 				$Twtext = substr($text, 0, 75);
 				$Twtext = $Twtext.'... '.$TwURL;
 			}
@@ -132,7 +132,7 @@
 
 			$Knowntext = str_replace("\&quot;", "\"", $text);
 
-			$result = statusKnown('YOURKNOWNUSERNAME', 'YOURSUPERSECRETKNOWNAPIKEY', 'YOURTWITTERUSERNAME', $Knowntext);
+			$result = statusKnown('<?= $configs->knownUser ?>', '<?= $configs->knownAPIkey ?>', '<?= $configs->knownTwName ?>', $Knowntext);
 
 			// Known part over
 			
@@ -177,9 +177,9 @@
 
 			require_once('codebird.php');
 			 
-			\Codebird\Codebird::setConsumerKey("TWITTERAPIKEY", "TWITTERAPISECRET");
+			\Codebird\Codebird::setConsumerKey("<?= $configs->twAPIkey ?>", "<?= $configs->twAPIsecret ?>");
 			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken("TWITTERUSERTOKEN", "TWITTERUSERTOKENSECRET");
+			$cb->setToken("<?= $configs->twUserKey ?>", "<?= $configs->twUserSecret ?>");
 			 
 			$params = array(
 			  'status' => $Twtext

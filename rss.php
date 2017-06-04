@@ -25,7 +25,7 @@
 	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-	
+	$configs = include('configs.php');
 	header("Content-Type: text/xml;charset=iso-8859-1");
 	// include 'wp_comments.php';
 	$results = file_get_contents('text.txt');
@@ -34,8 +34,8 @@
 ?>
 <rss version="2.0">
 	<channel>
-		<title>YOURLiveblogTITLEHERE</title>
-		<description>YOURLiveblogDESCRIPTIONHERE</description>
+		<title><?= $configs->siteTitle ?></title>
+		<description><?= $configs->siteDescription ?></description>
 		<link> <?php echo "http://" . $_SERVER['HTTP_HOST']; ?> </link>
 		<language>en</language>
 		<?php
