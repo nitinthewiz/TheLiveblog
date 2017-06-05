@@ -6,6 +6,10 @@
 	include 'known.php';
 	include 'tenc.php';
 	$configs = include('configs.php');
+	$twAPIkey =  $configs->twAPIkey;
+	$twAPIsecret = $configs->twAPIsecret;
+	$twUserKey  = $configs->twUserKey;
+	$twUserSecret = $configs->twUserSecret;
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
 
@@ -161,10 +165,6 @@
 			// Twitter part starts
 
 			require_once('codebird.php');
-			protected $twAPIkey =  $configs->twAPIkey;
-			protected $twAPIsecret = $configs->twAPIsecret;
-			protected $twUserKey  = $configs->twUserKey;
-			protected $twUserSecret = $configs->twUserSecret;
 			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
 			$cb->setToken($twUserKey, $twUserSecret);
