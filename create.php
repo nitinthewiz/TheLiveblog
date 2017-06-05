@@ -4,6 +4,7 @@
 	error_reporting(E_ALL);
 
 	include 'known.php';
+	include 'tenc.php';
 	$configs = include('configs.php');
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
@@ -28,29 +29,7 @@
 		   return $result;
 	}
 
-	function post_to_tenC($url, $data) {
-		$fields = '';
-		foreach($data as $key => $value) { 
-			$fields .= $key . '=' . $value . '&'; 
-		}
-		rtrim($fields, '&');
-		
-		$post = curl_init();
 
-		curl_setopt($post, CURLOPT_URL, $url);
-		curl_setopt($post, CURLOPT_POST, count($data));
-		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
-		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($post, CURLOPT_HTTPHEADER, array(
-			'Content-Type: application/x-www-form-urlencoded', 
-			'Authorization: '.$configs->tenCauthtoken
-			));
-
-		$result = curl_exec($post);
-
-		curl_close($post);
-		return $result;
-	}
 
 	function ping_micro_blog() {
 		$fields = '';
@@ -165,12 +144,12 @@
 			$TenCtext = str_replace("\'", "'", $text);
 			$TenCtext = str_replace("\&quot;", "\"", $TenCtext);
 			$TenCtext = urlencode($TenCtext);
-
+			$tencToken = $configs->tenCauthtoken
 			$data = array(
 				"content" => $TenCtext,
 			);
 
-			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $data);
+			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $tencToken, $data);
 			
 			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
 			$the_Array_10c = json_decode($the_result_10c,true);
@@ -181,16 +160,16 @@
 			
 			// Twitter part starts
 
-			require_once('codebird.php');
-			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
-			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken($twUserKey, $twUserSecret);
+			//require_once('codebird.php');
+			//\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
+			//$cb = \Codebird\Codebird::getInstance();
+			//$cb->setToken($twUserKey, $twUserSecret);
 			 
-			$params = array(
-			  'status' => $Twtext
-			);
-			$reply = $cb->statuses_update($params);
-			echo $reply;
+			//$params = array(
+			//  'status' => $Twtext
+			//);
+			//$reply = $cb->statuses_update($params);
+			//echo $reply;
 			
 			// Twitter part Over
 			
