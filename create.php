@@ -43,7 +43,7 @@
 		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($post, CURLOPT_HTTPHEADER, array(
 			'Content-Type: application/x-www-form-urlencoded', 
-			'Authorization: '.$configs->tenCauthtoken;
+			'Authorization: '.$configs->tenCauthtoken
 			));
 
 		$result = curl_exec($post);
