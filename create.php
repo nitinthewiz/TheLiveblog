@@ -34,6 +34,7 @@
 	}
 
 	function post_to_tenC($url, $data) {
+		$token = $tenctoken;
 		$fields = '';
 		foreach($data as $key => $value) { 
 			$fields .= $key . '=' . $value . '&'; 
@@ -48,7 +49,7 @@
 		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($post, CURLOPT_HTTPHEADER, array(
 			'Content-Type: application/x-www-form-urlencoded', 
-			'Authorization: '.$tenctoken
+			'Authorization: '.$token
 			));
 
 		$result = curl_exec($post);
