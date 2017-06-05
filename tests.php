@@ -6,7 +6,7 @@
 	foreach ($configs as $value) {
 
 	echo $value;
-	echo gettype($value), '\n';
+	echo gettype($value), "\n";
 	}
 //		'userName'
 //	'siteUrl'
