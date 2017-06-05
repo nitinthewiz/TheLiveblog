@@ -3,9 +3,11 @@
 	error_reporting(E_ALL);
 
 	$configs = include('configs.php');
-	echo $configs->userName, "\n";
-	echo gettype($configs->userName);
+	foreach ($configs as $value) {
 
+	echo $value;
+	echo gettype($value), '\n';
+	}
 //		'userName'
 //	'siteUrl'
 //	'siteTitle'
