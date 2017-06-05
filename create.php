@@ -144,7 +144,7 @@
 			$TenCtext = str_replace("\'", "'", $text);
 			$TenCtext = str_replace("\&quot;", "\"", $TenCtext);
 			$TenCtext = urlencode($TenCtext);
-			$tencToken = $configs->tenCauthtoken
+			$tencToken = $configs->tenCauthtoken;
 			$data = array(
 				"content" => $TenCtext,
 			);
