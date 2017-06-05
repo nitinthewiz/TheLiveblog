@@ -5,11 +5,6 @@
 
 	include 'known.php';
 	$configs = include('configs.php');
-	$tenctoken = $configs->tenCauthtoken;
-	$twAPIKey = $configs->twAPIkey;
-	$twAPIsecret = $configs->twAPIsecret;
-	$twuserkey = $configs->twUserKey;
-	$twusersecret = $configs->twUserSecret;
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
 
@@ -34,7 +29,6 @@
 	}
 
 	function post_to_tenC($url, $data) {
-		$token = $tenctoken;
 		$fields = '';
 		foreach($data as $key => $value) { 
 			$fields .= $key . '=' . $value . '&'; 
@@ -49,7 +43,7 @@
 		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($post, CURLOPT_HTTPHEADER, array(
 			'Content-Type: application/x-www-form-urlencoded', 
-			'Authorization: '.$token
+			'Authorization: '.$configs->tenCauthtoken;
 			));
 
 		$result = curl_exec($post);
@@ -190,7 +184,7 @@
 			require_once('codebird.php');
 			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken($twuserkey, $twusersecret);
+			$cb->setToken($twUserKey, $twUserSecret);
 			 
 			$params = array(
 			  'status' => $Twtext
