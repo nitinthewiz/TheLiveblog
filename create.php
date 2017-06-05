@@ -132,7 +132,7 @@
 
 			$Knowntext = str_replace("\&quot;", "\"", $text);
 
-			$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $Knowntext);
+			$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $configs->knownSite, $Knowntext);
 
 			// Known part over
 			
