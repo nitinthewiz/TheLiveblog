@@ -5,8 +5,7 @@
 	$configs = include('configs.php');
 	foreach ($configs as $value) {
 
-	echo $value;
-	echo gettype($value), "\n";
+	echo $value.":".gettype($value)."\n";
 	}
 //		'userName'
 //	'siteUrl'
