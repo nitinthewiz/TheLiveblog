@@ -34,14 +34,17 @@
 			$fields .= $key . '=' . $value . '&'; 
 		}
 		rtrim($fields, '&');
-
+		$token = $configs->tenCauthtoken;
 		$post = curl_init();
 
 		curl_setopt($post, CURLOPT_URL, $url);
 		curl_setopt($post, CURLOPT_POST, count($data));
 		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
 		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($post, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded', 'Authorization: '.$configs->tenCauthtoken));
+		curl_setopt($post, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/x-www-form-urlencoded', 
+			'Authorization: '.$token
+			));
 
 		$result = curl_exec($post);
 
