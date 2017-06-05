@@ -31,12 +31,12 @@
 
 
 
-	function ping_micro_blog() {
+	function ping_micro_blog($url) {
 		$fields = '';
 		// foreach($data as $key => $value) { 
 		// 	$fields .= $key . '=' . $value . '&'; 
 		// }
-		$fields .= "url" . '=' . "http://".$configs->siteUrl."/rss.php" . '&'; 
+		$fields .= "url" . '=' . "http://".$url."/rss.php" . '&'; 
 		rtrim($fields, '&');
 
 		$post = curl_init();
@@ -175,7 +175,7 @@
 			
 			// ping microblog
 
-			ping_micro_blog();
+			ping_micro_blog($configs->siteUrl);
 
 			// ping micrblog over
 		}
