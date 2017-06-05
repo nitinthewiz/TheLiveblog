@@ -160,16 +160,20 @@
 			
 			// Twitter part starts
 
-			//require_once('codebird.php');
-			//\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
-			//$cb = \Codebird\Codebird::getInstance();
-			//$cb->setToken($twUserKey, $twUserSecret);
-			 
-			//$params = array(
-			//  'status' => $Twtext
-			//);
-			//$reply = $cb->statuses_update($params);
-			//echo $reply;
+			require_once('codebird.php');
+			$twAPIkey = $configs->twAPIkey;
+			$twAPIsecret = $configs->twAPIsecret;
+			$twUserKey  = $configs->twUserKey;
+			$twUserSecret = $configs->twUserSecret;
+			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
+			$cb = \Codebird\Codebird::getInstance();
+			$cb->setToken($twUserKey, $twUserSecret);
+			
+			$params = array(
+			  'status' => $Twtext
+			);
+			$reply = $cb->statuses_update($params);
+			echo $reply;
 			
 			// Twitter part Over
 			
