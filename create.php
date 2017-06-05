@@ -5,6 +5,11 @@
 
 	include 'known.php';
 	$configs = include('configs.php');
+	$tenctoken = $configs->tenCauthtoken;
+	$twAPIKey = $configs->twAPIkey;
+	$twAPIsecret = $configs->twAPIsecret;
+	$twuserkey = $configs->twUserKey;
+	$twusersecret = $configs->twUserSecret;
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
 
@@ -34,7 +39,7 @@
 			$fields .= $key . '=' . $value . '&'; 
 		}
 		rtrim($fields, '&');
-		$token = $configs->tenCauthtoken;
+		
 		$post = curl_init();
 
 		curl_setopt($post, CURLOPT_URL, $url);
@@ -43,7 +48,7 @@
 		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($post, CURLOPT_HTTPHEADER, array(
 			'Content-Type: application/x-www-form-urlencoded', 
-			'Authorization: '.$token
+			'Authorization: '.$tenctoken
 			));
 
 		$result = curl_exec($post);
@@ -182,13 +187,9 @@
 			// Twitter part starts
 
 			require_once('codebird.php');
-			$APIKey = $configs->twAPIkey;
-			$APIsecret = $configs->twAPIsecret;
-			$userkey = $configs->twUserKey;
-			$usersecret = $configs->twUserSecret 
-			\Codebird\Codebird::setConsumerKey( $APIkey, $APIsecret);
+			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken($userkey, $usersecret);
+			$cb->setToken($twuserkey, $twusersecret);
 			 
 			$params = array(
 			  'status' => $Twtext
