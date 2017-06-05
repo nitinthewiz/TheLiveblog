@@ -161,10 +161,10 @@
 			// Twitter part starts
 
 			require_once('codebird.php');
-			$twAPIkey = (string)$configs->twAPIkey;
-			$twAPIsecret = (string)$configs->twAPIsecret;
-			$twUserKey  = (string)$configs->twUserKey;
-			$twUserSecret = (string)$configs->twUserSecret;
+			protected $twAPIkey =  $configs->twAPIkey;
+			protected $twAPIsecret = $configs->twAPIsecret;
+			protected $twUserKey  = $configs->twUserKey;
+			protected $twUserSecret = $configs->twUserSecret;
 			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
 			$cb->setToken($twUserKey, $twUserSecret);
