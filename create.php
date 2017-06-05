@@ -1,5 +1,8 @@
 <?php
 
+	ini_set('display_errors', 'On');
+	error_reporting(E_ALL);
+
 	include 'known.php';
 	$configs = include('configs.php');
 	$results = file_get_contents('text.txt');
