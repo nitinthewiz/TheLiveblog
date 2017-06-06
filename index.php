@@ -13,10 +13,6 @@ $configs = include('configs.php');
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<link rel="alternate" type="application/rss+xml" title="<?= $configs->siteTitle ?>" href="/rss.php">
 	<script type="text/javascript">
-		function toADN(comment_ID){
-			var text = document.getElementById(comment_ID).innerHTML;
-			window.open('https://alpha.app.net/intent/post?text='+text+'%20-%20@YOURADNUSERNAMEHERE - http://YOURLIVEBLOGHERE.COM%23'+comment_ID);
-		}
 		function toTw(comment_ID){
 			var text = document.getElementById(comment_ID).innerHTML;
 			window.open('http://twitter.com/?status='+text+'%20-%20@<?= $configs->twitterName ?> - http://<?= $configs->siteUrl ?>%23'+comment_ID+' .');
@@ -35,6 +31,7 @@ $configs = include('configs.php');
      <div class="col fluid py-1">
 	<h1><?= $configs->siteTitle ?></h1>
 	<h2><?= $configs->siteDescription ?></h2>
+	<h3><a href="/rss.php">rss</a></h3>
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tbody>
@@ -42,9 +39,7 @@ $configs = include('configs.php');
 			
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
-				echo "<tr><td id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='http://<?= $configs->siteUrl ?>#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
-				// <tr><td><button type=\"button\" class=\"btn btn-info btn-xs\" onclick=\"toTw(".$livepost['comment_ID'].")\">Tweet this!</button></td></tr>"; 
-				// echo "<tr><td rowspan='2' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='http://YOURLIVEBLOGHERE.COM#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr><tr><td><button type=\"button\" class=\"btn btn-default btn-xs\" onclick=\"toADN(".$livepost['comment_ID'].")\">Share To ADN</button><button type=\"button\" class=\"btn btn-info btn-xs\" onclick=\"toTw(".$livepost['comment_ID'].")\">Tweet this!</button></td></tr>";
+				echo "<tr><td id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td class=\"float-right\"><a href='http://<?= $configs->siteUrl ?>#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			?>
 			</tbody>
 		</table>
