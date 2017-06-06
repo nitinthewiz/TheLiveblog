@@ -15,7 +15,7 @@ $configs = include('configs.php');
 	<script type="text/javascript">
 		function toTw(comment_ID){
 			var text = document.getElementById(comment_ID).innerHTML;
-			window.open('http://twitter.com/?status='+text+'%20-%20@<?= $configs->twitterName ?> - http://<?= $configs->siteUrl ?>%23'+comment_ID+' .');
+			window.open('http://twitter.com/?status='+text+'%20-%20@<?= $configs->twitterName ?> - http://<?= $configs->siteUrl ?>%23'+comment_ID);
 		}
 	</script>
 	<style type="text/css">
@@ -39,7 +39,7 @@ $configs = include('configs.php');
 			
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
-				echo "<tr><td id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td class=\"float-right\"><a href='http://<?= $configs->siteUrl ?>#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+				echo "<tr><td id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			?>
 			</tbody>
 		</table>
