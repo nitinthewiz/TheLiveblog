@@ -31,7 +31,7 @@ $configs = include('configs.php');
      <div class="col fluid py-1">
 	<h1><?= $configs->siteTitle ?></h1>
 	<h2><?= $configs->siteDescription ?></h2>
-	<h3><a href="/rss.php">rss</a></h3>
+	<h3><a href="<?= $configs->siteUrl ?>/rss.php">rss</a></h3>
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<tbody>
