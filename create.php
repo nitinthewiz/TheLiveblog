@@ -173,7 +173,7 @@
 			  'status' => $Twtext
 			);
 			$reply = $cb->statuses_update($params);
-			echo $reply;
+			var_dump($reply);
 			
 			// Twitter part Over
 			
