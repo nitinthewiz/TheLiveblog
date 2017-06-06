@@ -1,7 +1,7 @@
 TheLiveblog
 ===========
 
-  A simple liveblog using PHP that posts to itself, ADN, withKnown, 10Centuries, micro.blog (because it has an RSS feed), and Twitter at the same time. Very rude, very hackable. Beware.
+  A simple liveblog using PHP that posts to itself, withKnown, 10Centuries, micro.blog (because it has an RSS feed), and Twitter at the same time. Very rude, very hackable. Beware.
 
 Requirements
 ============
@@ -23,45 +23,19 @@ Setup
 
   You'll need -  
   
-  1. Twitter consumer key and token. 
+  1. Twitter consumer key and token
+  2. Twitter userkey and secret
   2. 10Centuries API key 
   3. Withknown API key 
-  4. ~~ADN access token.~~(ADN is dead. Long live ADN) 
-
-  Find and replace the following -  
   
-  In index.php -
-  
-  1. YOURLIVEBLOGHERE.COM - with your sitename.  
-  2. YOURADNUSERNAMEHERE  (Ignore if you want to. This function will not get fired now)
-  3. YOURTWITTERUSERNAMEHERE  
-  4. YOURLiveblogTITLEHERE  
-
-  In create.php -
-  
-  1. YOURSUPERSECRETPASSWORDHERE - This is your passphrase to save things. This is your last line of defence. Make it snazzy.  
-  2. YOURLIVEBLOGHERE.COM  
-  3. ~~ADNACCESSTOKENHERE - Setup an ADN app for free at [ADN Developer's Site](http://developers.app.net) and then generate an access token for your app ()~~
-  4. TWITTERAPIKEY, TWITTERAPISECRET  
-  5. TWITTERUSERTOKEN, TWITTERUSERTOKENSECRET  
-  6. YOURTIMEZONEHERE - Mine's America/Vancouver. This is based on PHP timezones which is from the list [here](http://php.net/manual/en/timezones.php)
-  7. YOURNAMEHERE - This is your name. Hi. Mine's Nitin Khanna  
-  8. YOURFANCYPANTSAUTHTOKENHERE - This is your 10Centuries Auth token. Refer [here](https://pinboard.in/u:larand/t:10Centuries/) to see how to generate it.
-  9. YOURKNOWNUSERNAME, YOURSUPERSECRETKNOWNAPIKEY, YOURTWITTERUSERNAME - This is your Known Username, your Known API key (user withknown dev docs to find how to get it. I forget), and your twitter username. The idea is that you can get known to post to twitter for you. There is a limitation here, I believe, that without your twitter username this function won't work. I haven't tested it without the twitter username. Left to reader as exercise.
-  
-  In rss.php - 
-  
-  1. YOURLiveblogTITLEHERE
-  2. YOURLiveblogDESCRIPTIONHERE
-  3. YOURLIVEBLOGHERE.COM - make sure *not* to remove the '#' after the url. This hash helps point to the right post when someone comes directly to a post on your liveblog. For [example](http://liveblog.nitinkhanna.com/#30). Also, this has to be done twice, for link and guid. GUID is an optional field, but it helps in posting to the micro.blog service. 
-    
+  Open `configs.php` -- all items are explained in the document, along with where to find them. Replace the dummy values with your own values.
   
 How to use
 ==========
   Now that you've setup the files, upload them to your server (if you've not already done that) and open yoursite.com/create.php and bookmark this.   
   The first field is your post and the second, smaller field is the passphrase.   
   Fill both and hit submit. If the post goes through, you'll see the words "Array" and the postID (it'll start with 1).   
-  If it fails, well bupkis.  
+  If it fails, well bupkes.
   The posts will be displayed on yoursite.com   
 
 Issues

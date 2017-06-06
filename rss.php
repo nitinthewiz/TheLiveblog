@@ -25,7 +25,7 @@
 	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-	
+	$configs = include('configs.php');
 	header("Content-Type: text/xml;charset=iso-8859-1");
 	// include 'wp_comments.php';
 	$results = file_get_contents('text.txt');
@@ -34,8 +34,8 @@
 ?>
 <rss version="2.0">
 	<channel>
-		<title>YOURLiveblogTITLEHERE</title>
-		<description>YOURLiveblogDESCRIPTIONHERE</description>
+		<title><?= $configs->siteTitle ?></title>
+		<description><?= $configs->siteDescription ?></description>
 		<link> <?php echo "http://" . $_SERVER['HTTP_HOST']; ?> </link>
 		<language>en</language>
 		<?php
@@ -45,8 +45,8 @@
 				if($i==20) break;
 				echo "\n<item>\n";
 					echo "<title></title>\n";
-					echo "<link>YOURLIVEBLOGHERE.COM#".$livepost['comment_ID']."</link>\n";
-					echo "<guid>YOURLIVEBLOGHERE.COM#".$livepost['comment_ID']."</guid>\n";
+					echo "<link><?= $configs->siteUrl ?>#".$livepost['comment_ID']."</link>\n";
+					echo "<guid><?= $configs->siteUrl ?>#".$livepost['comment_ID']."</guid>\n";
 					echo "<pubDate>" . date( DATE_RFC822, strtotime($livepost['comment_date']) ) . "</pubDate>\n";
 					echo "<description>";
 						echo str_replace('&nbsp;',' ',$livepost['comment_content']);

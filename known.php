@@ -1,6 +1,7 @@
 <?php
-	function statusKnown($user, $apiKey, $twitterusername, $data){
-		$url = "https://".$user.".withknown.com/status/edit";
+	
+	function statusKnown($user, $apiKey, $twitterusername, $knownSite, $data){
+		$url = "https://".$knownSite."/status/edit";
 		$data = "syndication%5B%5D=twitter%3A%3A".$twitterusername."&body=".$data;
 		$sig = base64_encode(hash_hmac("sha256","/status/edit",$apiKey,true));
 

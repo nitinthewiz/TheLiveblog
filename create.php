@@ -1,7 +1,15 @@
 <?php
 
-	include 'known.php';
+	ini_set('display_errors', 'On');
+	error_reporting(E_ALL);
 
+	include 'known.php';
+	include 'tenc.php';
+	$configs = include('configs.php');
+	$twAPIkey =  $configs->twAPIkey;
+	$twAPIsecret = $configs->twAPIsecret;
+	$twUserKey  = $configs->twUserKey;
+	$twUserSecret = $configs->twUserSecret;
 	$results = file_get_contents('text.txt');
 	$wp_comments = eval("return " . $results . ";");
 
@@ -25,33 +33,14 @@
 		   return $result;
 	}
 
-	function post_to_tenC($url, $data) {
-		$fields = '';
-		foreach($data as $key => $value) { 
-			$fields .= $key . '=' . $value . '&'; 
-		}
-		rtrim($fields, '&');
 
-		$post = curl_init();
 
-		curl_setopt($post, CURLOPT_URL, $url);
-		curl_setopt($post, CURLOPT_POST, count($data));
-		curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
-		curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($post, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded", "Authorization: YOURFANCYPANTSAUTHTOKENHERE"));
-
-		$result = curl_exec($post);
-
-		curl_close($post);
-		return $result;
-	}
-
-	function ping_micro_blog() {
+	function ping_micro_blog($url) {
 		$fields = '';
 		// foreach($data as $key => $value) { 
 		// 	$fields .= $key . '=' . $value . '&'; 
 		// }
-		$fields .= "url" . '=' . "http://YOURLIVEBLOGHERE.COM/rss.php" . '&'; 
+		$fields .= "url" . '=' . "http://".$url."/rss.php" . '&'; 
 		rtrim($fields, '&');
 
 		$post = curl_init();
@@ -73,7 +62,7 @@
 		$text = $_POST['something'];
 		$pass = $_POST['nothing'];
 
-		if ($pass == 'YOURSUPERSECRETPASSWORDHERE'){
+		if ($pass == $configs->password){
 			reset($wp_comments);
 			
 			$errors = array_filter($wp_comments);
@@ -92,11 +81,11 @@
 			$comment_id = strval($itemID);
 			
 			// Change the line below to your timezone!
-			date_default_timezone_set('YOURTIMEZONEHERE'); // Mine's America/Vancouver
+			date_default_timezone_set( $configs->timezone);
 			$date = date('Y-m-d H:i:s', time());
 
 			$postarray = array(
-				'comment_author' => 'YOURNAMEHERE',
+				'comment_author' => $configs->userName,
 				'comment_date' => $date,
 				'comment_content' => $text,
 				'comment_ID' => $comment_id
@@ -109,7 +98,7 @@
 			// Length setting part starts
 			
 			if (strlen($text) > 256){
-				$ADNURL = 'http://YOURLIVEBLOGHERE.COM#'.$comment_id;
+				$ADNURL = 'http://'.$configs->siteUrl.'#'.$comment_id;
 				$ADNtext = substr($text, 0, 190);
 				$ADNtext = $ADNtext.'... '.$ADNURL;
 			}
@@ -118,7 +107,7 @@
 			}
 
 			if (strlen($text) > 140){
-				$TwURL = 'http://YOURLIVEBLOGHERE.COM#'.$comment_id;
+				$TwURL = 'http://'. $configs->siteUrl.'#'.$comment_id;
 				$Twtext = substr($text, 0, 75);
 				$Twtext = $Twtext.'... '.$TwURL;
 			}
@@ -132,7 +121,7 @@
 
 			$Knowntext = str_replace("\&quot;", "\"", $text);
 
-			$result = statusKnown('YOURKNOWNUSERNAME', 'YOURSUPERSECRETKNOWNAPIKEY', 'YOURTWITTERUSERNAME', $Knowntext);
+			$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $configs->knownSite, $Knowntext);
 
 			// Known part over
 			
@@ -159,12 +148,12 @@
 			$TenCtext = str_replace("\'", "'", $text);
 			$TenCtext = str_replace("\&quot;", "\"", $TenCtext);
 			$TenCtext = urlencode($TenCtext);
-
+			$tencToken = $configs->tenCauthtoken;
 			$data = array(
 				"content" => $TenCtext,
 			);
 
-			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $data);
+			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $tencToken, $data);
 			
 			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
 			$the_Array_10c = json_decode($the_result_10c,true);
@@ -176,22 +165,21 @@
 			// Twitter part starts
 
 			require_once('codebird.php');
-			 
-			\Codebird\Codebird::setConsumerKey("TWITTERAPIKEY", "TWITTERAPISECRET");
+			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken("TWITTERUSERTOKEN", "TWITTERUSERTOKENSECRET");
-			 
+			$cb->setToken($twUserKey, $twUserSecret);
+			
 			$params = array(
 			  'status' => $Twtext
 			);
 			$reply = $cb->statuses_update($params);
-			echo $reply;
+			var_dump($reply);
 			
 			// Twitter part Over
 			
 			// ping microblog
 
-			ping_micro_blog();
+			ping_micro_blog($configs->siteUrl);
 
 			// ping micrblog over
 		}
