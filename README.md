@@ -33,10 +33,15 @@ Setup
 How to use
 ==========
   Now that you've setup the files, upload them to your server (if you've not already done that). In some instances, you'll have to change the owner of the following files from your own user to 'www-data' - create.php, index.php, text.txt
+  
   Open yoursite.com/create.php and bookmark this.
+  
   The first field is your post and the second, smaller field is the passphrase.   
+  
   Fill both and hit submit. If the post goes through, you'll see the words "Array" and the postID (it'll start with 1).   
+  
   If it fails, well bupkes.
+  
   The posts will be displayed on yoursite.com   
 
 Issues
