@@ -158,7 +158,7 @@
 			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
 			$the_Array_10c = json_decode($the_result_10c,true);
 			$tencLink = $the_Array_10c->data->urls->full_url;
-			var_dump($tencLink)
+			var_dump($tencLink);
 
 			// 10Centuries PART OVER
 			
