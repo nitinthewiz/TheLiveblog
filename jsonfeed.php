@@ -24,7 +24,7 @@
 	$feed_json = array(
 		'version' => 'https://jsonfeed.org/version/1',
 		'home_page_url' => $configs->siteUrl,
-		'feed_url' => $configs->siteUrl.'/json.php',
+		'feed_url' => $configs->siteUrl.'/jsonfeed.php',
 		'title' => $configs->siteTitle,
 		'description' => $configs->siteDescription,
 		'items' => $feed_items,
