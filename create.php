@@ -158,7 +158,7 @@
 			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
 			$the_Array_10c = json_decode($the_result_10c,true);
 
-			print_r($the_Array_10c);
+			print("https://" . $the_Array_10c->data->urls->full_url);
 
 			// 10Centuries PART OVER
 			
@@ -173,7 +173,8 @@
 			  'status' => $Twtext
 			);
 			$reply = $cb->statuses_update($params);
-			var_dump($reply);
+			$array_twit = json_decode($reply);
+			print("https://twitter.com/" . $array_twit->user->screen_name ."/status/" . $array_twit->id_str);
 			
 			// Twitter part Over
 			
