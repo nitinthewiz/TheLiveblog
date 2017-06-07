@@ -157,8 +157,8 @@
 			
 			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
 			$the_Array_10c = json_decode($the_result_10c,true);
-
-			var_dump($the_Array_10c->data->urls->full_url);
+			$tencLink = $the_Array_10c->data->urls->full_url;
+			var_dump($tencLink)
 
 			// 10Centuries PART OVER
 			
@@ -173,10 +173,11 @@
 			  'status' => $Twtext
 			);
 			$reply = $cb->statuses_update($params);
-			$array_twit = json_decode($reply);
-			var_dump($array_twit->user->screen_name);
-			var_dump($array_twit->id_str);
-			
+			$array_twit = json_decode($reply,true);
+			$twScreen = $array_twit->user->screen_name;
+			var_dump($twScreen);
+			$tweetId = $array_twit->id_str;
+			var_dump($tweetId);			
 			// Twitter part Over
 			
 			// ping microblog
