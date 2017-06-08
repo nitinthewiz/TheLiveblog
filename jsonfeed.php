@@ -19,6 +19,7 @@
 		);
 
 		$feed_items[] = $feed_item;
+		i++;
 	}
 
 	$feed_json = array(
@@ -30,5 +31,6 @@
 		'items' => $feed_items,
 	);
 
-	echo json_encode($feed_json);
+	header('Content-Type: application/json; charset=utf-8');
+	echo json_encode($feed_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 ?>
