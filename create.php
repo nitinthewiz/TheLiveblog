@@ -208,9 +208,14 @@
 				<label for="nothing">Passphrase</label>
 				<input class="form-control" id="nothing" name="nothing" type="password" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>" >
 			</div>
-		    <h6 id="count" class="pull-right"></h6>
-		    <button type="submit" class="btn btn-primary" name="submit">Post It!</button>
-		    
+			<div class="form-group row">
+				<div class="col-2">
+					<button type="submit" class="btn btn-primary" name="submit">Post It!</button>
+			    </div>
+			    <div class="col-2">
+			    	<h6 id="count" class="pull-right"></h6>
+			    </div>
+		    </div>
 		</form>
 
 	</div>
