@@ -200,7 +200,7 @@
      <div class="col fluid py-1">
 
 		<form method="post" action="">
-			<div class="form-group">
+			<div class="form-group row">
 				<label for="something">Enter your Words</label>
 				<textarea onkeyup="textareaLengthCheck()" rows="7" class="form-control" id="something" name="something" value="<?= isset($_POST['something']) ? htmlspecialchars($_POST['something']) : '' ?>" ></textarea>
 			</div>
@@ -208,8 +208,9 @@
 				<label for="nothing">Passphrase</label>
 				<input class="form-control" id="nothing" name="nothing" type="password" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>" >
 			</div>
+		    <h6 id="count" class="pull-right"></h6>
 		    <button type="submit" class="btn btn-primary" name="submit">Post It!</button>
-		    <p id="count"></p>
+		    
 		</form>
 
 	</div>
