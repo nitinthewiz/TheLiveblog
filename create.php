@@ -127,7 +127,7 @@
 			$the_Array_10c = json_decode($the_result_10c, true);
 
 			// Sets up a variable which contains a link to the 10C blurb
-			$tenclink = "https://" . $arrayName['data']['0']['urls']['full_url'];
+			$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
 			echo $tenclink;
 
 			// 10Centuries PART OVER
@@ -143,13 +143,13 @@
 			  'status' => $Twtext
 			);
 			$reply = $cb->statuses_update($params);
-			$array_twit = json_decode($reply,true);
+			//$array_twit = json_decode($reply,true);
 
 			// Gives the twitter name if needed
-			$twScreen = $array_twit->user->screen_name;
-
+			$twScreen = $reply->user->screen_name;
+			$twid = $reply->id_str;
 			// Sets up a variable which provides a link to the posted tweet 
-			$twitlink = "https://twitter.com/" . $array_twit->user->screen_name . "/status/" . $array_twit->id_str;
+			$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
 			echo $twitlink; 
 			// Twitter part Over
 			
