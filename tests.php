@@ -17,7 +17,7 @@ $json = '
       "slug": "151880",
       "type": "post.social",
       "privacy": "visibility.public",
-      "guid": "e76d0cf88bcdcbcf09f607db8ea9f767bb920be2",
+      "guid": "e76d0",
       "content": {
         "text": "Good morning campers! Rise and Shine!",
         "html": "<p>Good morning campers! Rise and Shine!</p>",
@@ -81,14 +81,14 @@ $json = '
         "owner_id": false,
         "type": "channel.global",
         "privacy": "visibility.public",
-        "guid": "d9ba5a8d768d0dbd9fc9c3ea4c8e183b2aa7336c",
+        "guid": "d9ba5",
         "created_at": "2015-08-01T00:00:00Z",
         "created_unix": 1438387200,
         "updated_at": "2015-08-01T00:00:00Z",
         "updated_unix": 1438387200
       },
       "client": {
-        "hash": "60a526f605fbde05db239ec967bedb0f71f9115f",
+        "hash": "60a52",
         "name": "Known Integration"
       },
       "created_at": "2017-06-09T09:58:17Z",
@@ -108,8 +108,8 @@ $json = '
 
 $arrayName = json_decode($json, true);
 //echo $arrayName['meta']['server'];
-$link = "https://" . $arrayName['data']['0']['urls']['full_url'];
-echo $link
+$tenclink = "https://" . $arrayName['data']['0']['urls']['full_url'];
+echo $tenclink
 //		'userName'
 //	'siteUrl'
 //	'siteTitle'

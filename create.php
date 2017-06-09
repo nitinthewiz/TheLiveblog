@@ -79,21 +79,9 @@
 				$itemID++;	
 			}
 			$comment_id = strval($itemID);
-			
-			// Change the line below to your timezone!
+
 			date_default_timezone_set( $configs->timezone);
 			$date = date('Y-m-d H:i:s', time());
-
-			$postarray = array(
-				'comment_author' => $configs->userName,
-				'comment_date' => $date,
-				'comment_content' => $text,
-				'comment_ID' => $comment_id
-			);
-
-			array_unshift($wp_comments, $postarray);
-			$result = var_export($wp_comments, true); 
-			file_put_contents('text.txt', $result);
 
 			// Length setting part starts
 			
@@ -125,24 +113,6 @@
 
 			// Known part over
 			
-			// ADN PART STARTS
-
-// 			$ADNtext = str_replace("\'", "'", $ADNtext);
-// 			$ADNtext = str_replace("\&quot;", "\"", $ADNtext);
-// 			$ADNtext = urlencode($ADNtext);
-
-// 			$data = array(
-// 			   "text" => $ADNtext,
-// 			   "access_token" => "ADNACCESSTOKENHERE"
-// 			);
-
-// 			$the_result = post_to_url('https://alpha-api.app.net/stream/0/posts',$data);
-			
-// 			$the_result = preg_replace( "/\n/", "", $the_result);
-// 			$the_Array = json_decode($the_result,true);
-			
-			// ADN PART OVER
-			
 			// 10Centuries PART STARTS
 
 			$TenCtext = str_replace("\'", "'", $text);
@@ -154,11 +124,11 @@
 			);
 
 			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $tencToken, $data);
-			
-			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
-			$the_Array_10c = json_decode($the_result_10c,true);
-			$tencLink = $the_Array_10c->data->urls->full_url;
-			var_dump($tencLink);
+			$the_Array_10c = json_decode($the_result_10c, true);
+
+			// Sets up a variable which contains a link to the 10C blurb
+			$tenclink = "https://" . $arrayName['data']['0']['urls']['full_url'];
+			echo $tenclink;
 
 			// 10Centuries PART OVER
 			
@@ -174,17 +144,33 @@
 			);
 			$reply = $cb->statuses_update($params);
 			$array_twit = json_decode($reply,true);
+
+			// Gives the twitter name if needed
 			$twScreen = $array_twit->user->screen_name;
-			var_dump($twScreen);
-			$tweetId = $array_twit->id_str;
-			var_dump($tweetId);			
+
+			// Sets up a variable which provides a link to the posted tweet 
+			$twitlink = "https://twitter.com/" . $array_twit->user->screen_name . "/status/" . $array_twit->id_str;
+			echo $twitlink; 
 			// Twitter part Over
 			
 			// ping microblog
 
 			ping_micro_blog($configs->siteUrl);
 
-			// ping micrblog over
+			// ping microblog over
+
+
+			//This is the actual _POST_ element. This needs to move to the _END_ of the active part of the process.
+			$postarray = array(
+				'comment_author' => $configs->userName,
+				'comment_date' => $date,
+				'comment_content' => $text,
+				'comment_ID' => $comment_id
+			);
+
+			array_unshift($wp_comments, $postarray);
+			$result = var_export($wp_comments, true); 
+			file_put_contents('text.txt', $result);
 		}
 	}
 ?>
