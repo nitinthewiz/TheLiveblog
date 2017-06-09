@@ -205,15 +205,17 @@
 				<textarea onkeyup="textareaLengthCheck()" rows="7" class="form-control" id="something" name="something" value="<?= isset($_POST['something']) ? htmlspecialchars($_POST['something']) : '' ?>" ></textarea>
 			</div>
 			<div class="form-group row">
+				<div class="col-2">
+			    	<h6 id="count"></h6>
+			    </div>
+			</div>
+			<div class="form-group row">
 				<label for="nothing">Passphrase</label>
 				<input class="form-control" id="nothing" name="nothing" type="password" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>" >
 			</div>
 			<div class="form-group row">
 				<div class="col-2">
 					<button type="submit" class="btn btn-primary" name="submit">Post It!</button>
-			    </div>
-			    <div class="col-2">
-			    	<h6 id="count" class="pull-right"></h6>
 			    </div>
 		    </div>
 		</form>
