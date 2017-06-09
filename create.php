@@ -176,8 +176,10 @@
 ?>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
-<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script>
 	function textareaLengthCheck() {
 		tex = document.getElementById('something');
@@ -187,9 +189,16 @@
 	    count.innerHTML = length + " chars.";
 	}
 </script>
-<form method="post" action="" class="form-horizontal">
-    <textarea onkeyup="textareaLengthCheck()" rows="7" cols="50" id="something" name="something" value="<?= isset($_POST['something']) ? htmlspecialchars($_POST['something']) : '' ?>" ></textarea><br />
-    <textarea rows="1" cols="20" id="nothing" name="nothing" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>" ></textarea><br />
-    <input type="submit" class="btn" name="submit" />
+
+<form method="post" action="">
+	<div class="form-group">
+	<label for="something">Enter your Words</label>
+	<textarea onkeyup="textareaLengthCheck()" rows="7" class="form-control" id="something" name="something" value="<?= isset($_POST['something']) ? htmlspecialchars($_POST['something']) : '' ?>" ></textarea>
+	</div>
+	<div class="form-group row">
+	<label for="nothing">Passphrase</label>
+	<input class="form-control" id="nothing" name="nothing" type="password" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>">
+	</div>
+    <button type="submit" class="btn btn-primary" name="submit" />
     <p id="count"></p>
 </form>
