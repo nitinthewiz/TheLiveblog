@@ -23,6 +23,12 @@ $configs = include('configs.php');
 		.table {
 		    word-wrap: break-word;
 		}
+		.post .content {
+			float: left;
+		}
+		.post .syndic {
+			float: right;
+		}
 	</style>
 </head>
 <body>
@@ -40,7 +46,7 @@ $configs = include('configs.php');
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
 
-			echo "<tr><td id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span><span class=\"syndic\"><a href='".$livepost['blurb']."'><span class=\"fa fa-empire\"></span></a><a href='".$livepost['tweet']."'><span class=\"fa fa-twitter\"></span></span></td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+			echo "<tr><td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span><span class=\"syndic\"><a href='".$livepost['blurb']."'><span class=\"fa fa-empire\"></span></a><a href='".$livepost['tweet']."'><span class=\"fa fa-twitter\"></span></span></td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			?>
 			</tbody>
 		</table>
