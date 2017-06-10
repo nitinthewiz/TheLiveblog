@@ -35,29 +35,11 @@ $configs = include('configs.php');
 	<h3>Feeds:&nbsp;<a href="/rss.php">rss</a>&bull;<a href="/jsonfeed.php">json</a></h3>
 	<div class="table-responsive">
 		<table class="table table-striped">
-			<thead>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-			</thead>
 			<tbody>
 			<?php
-			if (!empty($livepost['blurb'])) {
-				$tlink = "<span class=\"fa fa-empire\"></span></a>";
-			} else {
-				$tlink = ' ';
-			}
-			if (!empty($livepost['tweet'])) {
-				$tweet = "<span class=\"fa fa-twitter\"></span></a>";
-			} else {
-				$tweet = ' ';
-			}
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
-				echo "<tr><td colspan="4" id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td>$tlink &bull; $tweet</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+				echo "<tr><td colspan="4" id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='".$livepost['blurb']".'>10C</a> &bull; <a href='".$livepost['tweet']."'>Tw</a></td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			?>
 			</tbody>
 		</table>
