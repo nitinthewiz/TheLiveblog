@@ -39,7 +39,7 @@ $configs = include('configs.php');
 			<?php
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
-				echo "<tr><td colspan="4" id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+				echo "<tr><td colspan='4' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td><a href='".$livepost['blurb']".'>10C</a> &bull; <a href='".$livepost['tweet']."'>Tw</a></td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			?>
 			</tbody>
 		</table>
