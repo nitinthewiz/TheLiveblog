@@ -42,6 +42,7 @@ $configs = include('configs.php');
 			<th></th>
 			<th></th>
 			<th></th>
+			</thead>
 			<tbody>
 			<?php
 			if (!empty($livepost['blurb'])) {
