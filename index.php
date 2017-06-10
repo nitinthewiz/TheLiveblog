@@ -12,6 +12,7 @@ $configs = include('configs.php');
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<link rel="alternate" type="application/rss+xml" title="<?= $configs->siteTitle ?>" href="/rss.php">
+	<link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
 	<script type="text/javascript">
 		function toTw(comment_ID){
 			var text = document.getElementById(comment_ID).innerHTML;
@@ -34,12 +35,28 @@ $configs = include('configs.php');
 	<h3>Feeds:&nbsp;<a href="/rss.php">rss</a>&bull;<a href="/jsonfeed.php">json</a></h3>
 	<div class="table-responsive">
 		<table class="table table-striped">
+			<thead>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
 			<tbody>
 			<?php
-			
+			if !empty($livepost['blurb']) {
+				$tlink = '<a href="'.$livepost['blurb'].'"><span class="fa fa-empire"></span></a>';
+			} else {
+				$tlink = "";
+			}
+			if !empty($livepost['tweet']) {
+				$tweet = '<a href="'.$livepost['tweet'].'"><span class="fa fa-twitter"></span></a>';
+			} else {
+				$tweet = "";
+			}
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
-				echo "<tr><td id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+				echo "<tr><td colspan="4" id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td>$tlink &bull; $tweet</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			?>
 			</tbody>
 		</table>
