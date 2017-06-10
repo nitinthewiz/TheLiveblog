@@ -47,7 +47,7 @@ $configs = include('configs.php');
 			if (!empty($livepost['tweet'])) {
 				$twlink = "<a href='".$livepost['tweet']."'>Tw</a>";
 			}
-				echo "<tr><td colspan='4' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td>".$tenlink $twlink."</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+				echo "<tr><td colspan='4' id='".$livepost['comment_ID']."'>".$livepost['comment_content']."</td><td>" . $tenlink ."&nbsp;" . $twlink . "</td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
 			}
 			}
 			?>
