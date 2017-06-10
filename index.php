@@ -44,12 +44,12 @@ $configs = include('configs.php');
 			<th></th>
 			<tbody>
 			<?php
-			if !empty($livepost['blurb']) {
+			if (!empty($livepost['blurb'])) {
 				$tlink = '<a href="' . $livepost['blurb'] . '"><span class="fa fa-empire"></span></a>';
 			} else {
 				$tlink = '';
 			}
-			if !empty($livepost['tweet']) {
+			if (!empty($livepost['tweet'])) {
 				$tweet = '<a href="' . $livepost['tweet'] . '"><span class="fa fa-twitter"></span></a>';
 			} else {
 				$tweet = '';
