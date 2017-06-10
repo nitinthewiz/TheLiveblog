@@ -165,7 +165,9 @@
 				'comment_author' => $configs->userName,
 				'comment_date' => $date,
 				'comment_content' => $text,
-				'comment_ID' => $comment_id
+				'comment_ID' => $comment_id,
+				'blurb' => $tenclink,
+				'tweet' => $twitlink
 			);
 
 			array_unshift($wp_comments, $postarray);
