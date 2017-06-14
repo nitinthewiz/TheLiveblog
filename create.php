@@ -123,15 +123,32 @@
 				"content" => $TenCtext,
 			);
 
-			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $tencToken, $data);
+			$the_result_10c = post_to_api('https://api.10centuries.org/content', $tencToken, $data);
 			$the_Array_10c = json_decode($the_result_10c, true);
 
 			// Sets up a variable which contains a link to the 10C blurb
 			$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
-			echo $tenclink;
+			echo $tenclink . " ";
 
 			// 10Centuries PART OVER
 			
+			// Mastodon PART STARTS
+
+			$MastodonText = str_replace("\'", "'", $text);
+			$MastodonText = str_replace("\&quot;", "\"", $MastodonText);
+			$MastodonText = urlencode($MastodonText);
+			$mastodonToken = "bearer " . $configs->mastodonToken;
+			$mastodonUrl = $configs->mastodonInstance . "/api/v1/statuses";
+			$data = array{
+				"status" => $MastodonText,
+			};
+
+			$result_mastodon = post_to_api($mastodonUrl, $mastodonToken, $data);
+			$array_mastodon = json_decode($result_mastodon, true);
+
+			// Sets up a variable linking to the toot
+			$mastodonlink = $array_mastodon['url'];
+			echo $mastodonlink . " ";
 			// Twitter part starts
 
 			require_once('codebird.php');
@@ -167,6 +184,7 @@
 				'comment_content' => $text,
 				'comment_ID' => $comment_id,
 				'blurb' => $tenclink,
+				'toot' => $mastodonlink
 				'tweet' => $twitlink
 			);
 

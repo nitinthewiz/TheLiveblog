@@ -16,7 +16,9 @@ return (object) array(
 	'knownUser' => 'myknown',						// the name of your known account
 	'knownAPIkey' => '49Zx87d0je',					// get this from known
 	'knownTwName' => 'cakesMan',					// the twitter account known uses for crossposts
-	'tenCauthtoken' => 'yopEPNfq34'					// your 10Centuries.org API key. see 10C API guide.
+	'tenCauthtoken' => 'yopEPNfq34',				// your 10Centuries.org API key. see 10C API guide.
+	'mastodonInstance' => 'servername.ext',			// your Mastodon Instance
+	'mastodonToken' => 'uWo42Bca91'					// get an auth code using Mastodon docs
 );
 
 ?>

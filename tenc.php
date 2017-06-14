@@ -1,6 +1,6 @@
 <?php
 
-	function post_to_tenC($url, $auth, $data) {
+	function post_to_api($url, $auth, $data) {
 		$fields = '';
 		foreach($data as $key => $value) { 
 			$fields .= $key . '=' . $value . '&'; 
