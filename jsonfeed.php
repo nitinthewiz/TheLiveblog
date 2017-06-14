@@ -19,7 +19,7 @@
 		);
 
 		$feed_items[] = $feed_item;
-		i++;
+		$i++;
 	}
 
 	$feed_json = array(
