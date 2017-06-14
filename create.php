@@ -79,21 +79,9 @@
 				$itemID++;	
 			}
 			$comment_id = strval($itemID);
-			
-			// Change the line below to your timezone!
+
 			date_default_timezone_set( $configs->timezone);
 			$date = date('Y-m-d H:i:s', time());
-
-			$postarray = array(
-				'comment_author' => $configs->userName,
-				'comment_date' => $date,
-				'comment_content' => $text,
-				'comment_ID' => $comment_id
-			);
-
-			array_unshift($wp_comments, $postarray);
-			$result = var_export($wp_comments, true); 
-			file_put_contents('text.txt', $result);
 
 			// Length setting part starts
 			
@@ -125,24 +113,6 @@
 
 			// Known part over
 			
-			// ADN PART STARTS
-
-// 			$ADNtext = str_replace("\'", "'", $ADNtext);
-// 			$ADNtext = str_replace("\&quot;", "\"", $ADNtext);
-// 			$ADNtext = urlencode($ADNtext);
-
-// 			$data = array(
-// 			   "text" => $ADNtext,
-// 			   "access_token" => "ADNACCESSTOKENHERE"
-// 			);
-
-// 			$the_result = post_to_url('https://alpha-api.app.net/stream/0/posts',$data);
-			
-// 			$the_result = preg_replace( "/\n/", "", $the_result);
-// 			$the_Array = json_decode($the_result,true);
-			
-			// ADN PART OVER
-			
 			// 10Centuries PART STARTS
 
 			$TenCtext = str_replace("\'", "'", $text);
@@ -154,11 +124,11 @@
 			);
 
 			$the_result_10c = post_to_tenC('https://api.10centuries.org/content', $tencToken, $data);
-			
-			$the_result_10c = preg_replace( "/\n/", "", $the_result_10c);
-			$the_Array_10c = json_decode($the_result_10c,true);
+			$the_Array_10c = json_decode($the_result_10c, true);
 
-			print_r($the_Array_10c);
+			// Sets up a variable which contains a link to the 10C blurb
+			$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
+			echo $tenclink;
 
 			// 10Centuries PART OVER
 			
@@ -173,22 +143,47 @@
 			  'status' => $Twtext
 			);
 			$reply = $cb->statuses_update($params);
-			var_dump($reply);
-			
+			//$array_twit = json_decode($reply,true);
+
+			// Gives the twitter name if needed
+			$twScreen = $reply->user->screen_name;
+			$twid = $reply->id_str;
+			// Sets up a variable which provides a link to the posted tweet 
+			$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
+			echo $twitlink; 
 			// Twitter part Over
 			
 			// ping microblog
 
 			ping_micro_blog($configs->siteUrl);
 
-			// ping micrblog over
+			// ping microblog over
+
+
+			//This is the actual _POST_ element. This needs to move to the _END_ of the active part of the process.
+			$postarray = array(
+				'comment_author' => $configs->userName,
+				'comment_date' => $date,
+				'comment_content' => $text,
+				'comment_ID' => $comment_id,
+				'blurb' => $tenclink,
+				'tweet' => $twitlink
+			);
+
+			array_unshift($wp_comments, $postarray);
+			$result = var_export($wp_comments, true); 
+			file_put_contents('text.txt', $result);
 		}
 	}
 ?>
+<html>
+<head>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
-<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script>
 	function textareaLengthCheck() {
 		tex = document.getElementById('something');
@@ -198,9 +193,40 @@
 	    count.innerHTML = length + " chars.";
 	}
 </script>
-<form method="post" action="" class="form-horizontal">
-    <textarea onkeyup="textareaLengthCheck()" rows="7" cols="50" id="something" name="something" value="<?= isset($_POST['something']) ? htmlspecialchars($_POST['something']) : '' ?>" ></textarea><br />
-    <textarea rows="1" cols="20" id="nothing" name="nothing" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>" ></textarea><br />
-    <input type="submit" class="btn" name="submit" />
-    <p id="count"></p>
-</form>
+</head>
+<body>
+<div class="container-fluid h-100" id="root">
+   <div class="row h-100">
+     <div class="col-md-1 fixed py-1"></div>
+     
+     <div class="col fluid py-1">
+
+		<form method="post" action="">
+			<div class="form-group row">
+				<label for="something">Enter your Words</label>
+				<textarea onkeyup="textareaLengthCheck()" rows="7" class="form-control" id="something" name="something" value="<?= isset($_POST['something']) ? htmlspecialchars($_POST['something']) : '' ?>" ></textarea>
+			</div>
+			<div class="form-group row">
+				<div class="col-2">
+			    	<h6 id="count"></h6>
+			    </div>
+			</div>
+			<div class="form-group row">
+				<label for="nothing">Passphrase</label>
+				<input class="form-control" id="nothing" name="nothing" type="password" value="<?= isset($_POST['nothing']) ? htmlspecialchars($_POST['nothing']) : '' ?>" >
+			</div>
+			<div class="form-group row">
+				<div class="col-2">
+					<button type="submit" class="btn btn-primary" name="submit">Post It!</button>
+			    </div>
+		    </div>
+		</form>
+
+	</div>
+    <div class="col-md-1 fixed py-1"></div>
+  </div>
+</div>
+</body>
+</html>
+
+
