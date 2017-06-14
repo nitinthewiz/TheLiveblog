@@ -129,6 +129,7 @@
 			// Sets up a variable which contains a link to the 10C blurb
 			$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
 			echo $tenclink;
+			echo "<br>";
 
 			// 10Centuries PART OVER
 			
