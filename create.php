@@ -139,9 +139,9 @@
 			$MastodonText = urlencode($MastodonText);
 			$mastodonToken = "bearer " . $configs->mastodonToken;
 			$mastodonUrl = $configs->mastodonInstance . "/api/v1/statuses";
-			$data = array{
+			$data = array(
 				"status" => $MastodonText,
-			};
+			);
 
 			$result_mastodon = post_to_api($mastodonUrl, $mastodonToken, $data);
 			$array_mastodon = json_decode($result_mastodon, true);
@@ -184,7 +184,7 @@
 				'comment_content' => $text,
 				'comment_ID' => $comment_id,
 				'blurb' => $tenclink,
-				'toot' => $mastodonlink
+				'toot' => $mastodonlink,
 				'tweet' => $twitlink
 			);
 
