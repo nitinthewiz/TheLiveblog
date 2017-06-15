@@ -138,7 +138,7 @@
 			$MastodonText = str_replace("\&quot;", "\"", $MastodonText);
 			$MastodonText = urlencode($MastodonText);
 			$mastodonToken = "bearer " . $configs->mastodonToken;
-			$mastodonUrl = $configs->mastodonInstance . "/api/v1/statuses";
+			$mastodonUrl = "https://" . $configs->mastodonInstance . "/api/v1/statuses";
 			$data = array(
 				"status" => $MastodonText,
 			);
@@ -149,6 +149,9 @@
 			// Sets up a variable linking to the toot
 			$mastodonlink = $array_mastodon['url'];
 			echo $mastodonlink . " ";
+
+			// Mastodon ENDS
+
 			// Twitter part starts
 
 			require_once('codebird.php');
