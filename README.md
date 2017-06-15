@@ -26,7 +26,8 @@ Setup
   1. Twitter consumer key and token
   2. Twitter userkey and secret
   2. 10Centuries API key 
-  3. Withknown API key 
+  3. Withknown API key
+  4. API Key for your Mastodon account. 
   
   Open `configs.php` -- all items are explained in the document, along with where to find them. Replace the dummy values with your own values.
   
@@ -38,7 +39,7 @@ How to use
 
   The textarea is where you'll write your post. The Passphrase Field is where you enter your passphrase, as set out in your config. Character count is filled out as you proceed.
   
-  Fill both and hit submit. If the post goes through, you'll see the link to your post on 10C and Twitter displayed above the textarea.
+  Fill both and hit submit. If the post goes through, you'll see the link to your post on 10C, Mastodon and Twitter displayed above the textarea.
   
   If it fails, well bupkes.
   
@@ -54,6 +55,8 @@ Issues
 ToDo
 ====
 
-[] Try to get this system working with some other services. Currently thinking of Mastodon and Pnut.
+[] Not display syndication links where syndication has not taken place
+[] Make the list of services configurable
+[] Try to get this system working with some other services. Currently thinking of Pnut.
 [] Try to extract syndication information from the post to withknown.
-[] I would like to apply the [indieweb mf2](https://indieweb.org/microformats) tags to the list of posts 
+[] I would like to apply the [indieweb mf2](https://indieweb.org/microformats) tags to the list of posts

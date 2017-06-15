@@ -1,5 +1,11 @@
 # Change Log
 
+## 2017-06-15 
+
+### Added
+
+- Support for Mastodon, the federated Social Network.
+
 ## 2017-06-13 
 
 ### Changed
