@@ -58,7 +58,17 @@ $configs = include('configs.php');
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost)
 
-			echo "<tr><td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span><span class=\"syndic\"><a href='".$livepost['blurb']."'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a><a href='".$livepost['toot']."'><svg class=\"icon icon-masto\"><use xlink:href=\"symbol-defs.svg#icon-masto\"></use></svg></a><a href='".$livepost['tweet']."'><svg class=\"icon icon-twitter\"><use xlink:href=\"symbol-defs.svg#icon-twitter\"></use></svg></a></span></td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
+			echo "<tr>
+			<td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span>
+				<span class=\"syndic\">
+					<a href='".$livepost['blurb']."'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a>
+					<a href='".$livepost['toot']."'><svg class=\"icon icon-masto\"><use xlink:href=\"symbol-defs.svg#icon-masto\"></use></svg></a>
+					<a href='".$livepost['tweet']."'><svg class=\"icon icon-twitter\"><use xlink:href=\"symbol-defs.svg#icon-twitter\"></use></svg></a>
+				</span>
+			</td>
+			<td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a>
+			</td>
+			</tr>";
 			?>
 			</tbody>
 		</table>
