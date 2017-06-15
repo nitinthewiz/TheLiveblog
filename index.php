@@ -56,20 +56,30 @@ $configs = include('configs.php');
 			<tbody>
 			<?php
 			$wp_comments = eval("return " . $results . ";");
-			foreach ($wp_comments as $livepost)
+			foreach ($wp_comments as $livepost) {
 
-			echo "<tr>
-			<td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span>
-				<span class=\"syndic\">
-					<a href='".$livepost['blurb']."'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a>
-					<a href='".$livepost['toot']."'><svg class=\"icon icon-masto\"><use xlink:href=\"symbol-defs.svg#icon-masto\"></use></svg></a>
-					<a href='".$livepost['tweet']."'><svg class=\"icon icon-twitter\"><use xlink:href=\"symbol-defs.svg#icon-twitter\"></use></svg></a>
-				</span>
-			</td>
-			<td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a>
-			</td>
-			</tr>";
-			?>
+				$blurb = '';
+				if (!empty($livepost['blurb'])) {
+					$blurb = "<a href='" . $livepost['blurb'] . "'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a> ";
+				}
+				$toot = '';
+				if (!empty($livepost['toot'])) {
+					$toot = "<a href='" . $livepost['toot'] . "'><svg class=\"icon icon-masto\"><use xlink:href=\"symbol-defs.svg#icon-masto\"></use></svg></a> ";
+				}
+				$tweet ='';
+				if (!empty($livepost['tweet'])) {
+					$tweet = "<a href='" . $livepost['tweet'] . "'><svg class=\"icon icon-twitter\"><use xlink:href=\"symbol-defs.svg#icon-twitter\"></use></svg></a>";
+				}
+				
+				echo "<tr>
+				<td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span>
+					<span class=\"syndic\">" . $blurb . $toot . $tweet . "</span>
+				</td>
+				<td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a>
+				</td>
+				</tr>";
+			}
+				?>
 			</tbody>
 		</table>
 	</div>
