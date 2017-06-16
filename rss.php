@@ -45,9 +45,9 @@
 				if($i==20) break;
 				echo "\n<item>\n";
 					echo "<title></title>\n";
-					echo "<link>$configs->siteUrl#".$livepost['comment_ID']."</link>\n";
-					echo "<guid>$configs->siteUrl#".$livepost['comment_ID']."</guid>\n";
-					echo "<pubDate>" . date( DATE_RFC822, strtotime($livepost['comment_date']) ) . "</pubDate>\n";
+					echo "<link>http://" . $configs->siteUrl . "#" . $livepost['comment_ID'] . "</link>\n";
+					echo "<guid>http://" . $configs->siteUrl . "#" . $livepost['comment_ID'] . "</guid>\n";
+					echo "<pubDate>" . date( DATE_RFC2822, strtotime($livepost['comment_date']) ) . "</pubDate>\n";
 					echo "<description>";
 						echo str_replace('&nbsp;',' ',$livepost['comment_content']);
 					echo "</description>\n";
