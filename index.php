@@ -59,7 +59,10 @@ $configs = include('configs.php');
 			<?php
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost) {
-
+				$known = '';
+				if (!empty($livepost['known'])) {
+					$blurb = "<a href='" . $livepost['known'] . "'><svg class=\"icon icon-known\"><use xlink:href=\"symbol-defs.svg#icon-known\"></use></svg></a> ";
+				}
 				$blurb = '';
 				if (!empty($livepost['blurb'])) {
 					$blurb = "<a href='" . $livepost['blurb'] . "'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a> ";
