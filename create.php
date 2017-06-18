@@ -110,7 +110,9 @@
 			$Knowntext = str_replace("\&quot;", "\"", $text);
 
 			$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $configs->knownSite, $Knowntext);
-
+			$knownRes = json_decode($result, true);
+			$knownlink = $knownRes['location'];
+			echo $knownlink . " ";
 			// Known part over
 			
 			// 10Centuries PART STARTS
@@ -186,7 +188,9 @@
 				'comment_date' => $date,
 				'comment_content' => $text,
 				'comment_ID' => $comment_id,
+				'known' => $knownlink,
 				'blurb' => $tenclink,
+				'known' => $knownlink,
 				'toot' => $mastodonlink,
 				'tweet' => $twitlink
 			);
