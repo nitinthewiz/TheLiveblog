@@ -78,7 +78,7 @@ $configs = include('configs.php');
 				
 				echo "<tr>
 				<td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span>
-					<span class=\"syndic\">" . $blurb . $toot . $tweet . "</span>
+					<span class=\"syndic\">" . $known . $blurb . $toot . $tweet . "</span>
 				</td>
 				<td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a>
 				</td>
