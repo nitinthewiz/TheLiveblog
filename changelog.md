@@ -1,5 +1,15 @@
 # Change Log
 
+## 2017-06-20 
+
+### Added
+
+- Syndication link to crosspost in withKnown
+
+### Changed
+
+- configs.php now allows the user to turn on/off syndication posts on a per-service basis. Empty elements in the results array are still entered for each service to avoid later issues.
+
 ## 2017-06-15 
 
 ### Added

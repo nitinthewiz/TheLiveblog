@@ -65,6 +65,11 @@
 		if ($pass == $configs->password){
 			reset($wp_comments);
 			
+			$knownlink = '';
+			$twitlink = '';
+			$mastodonlink = '';
+			$tenclink = '';
+
 			$errors = array_filter($wp_comments);
 			if (empty($errors)) {
 				$wp_comments = array();
@@ -106,79 +111,81 @@
 			// Length setting part over
 			
 			// Known part starts
+			if ($configs->postKnown) {
+				$Knowntext = str_replace("\&quot;", "\"", $text);
 
-			$Knowntext = str_replace("\&quot;", "\"", $text);
-
-			$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $configs->knownSite, $Knowntext);
-			$knownRes = json_decode($result, true);
-			$knownlink = $knownRes['location'];
-			echo $knownlink . " ";
+				$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $configs->knownSite, $Knowntext);
+				$knownRes = json_decode($result, true);
+				$knownlink = $knownRes['location'];
+				echo $knownlink . " ";
+			}
 			// Known part over
 			
 			// 10Centuries PART STARTS
+			if ($configs->postTenc) {
+				$TenCtext = str_replace("\'", "'", $text);
+				$TenCtext = str_replace("\&quot;", "\"", $TenCtext);
+				$TenCtext = urlencode($TenCtext);
+				$tencToken = $configs->tenCauthtoken;
+				$data = array(
+					"content" => $TenCtext,
+				);
 
-			$TenCtext = str_replace("\'", "'", $text);
-			$TenCtext = str_replace("\&quot;", "\"", $TenCtext);
-			$TenCtext = urlencode($TenCtext);
-			$tencToken = $configs->tenCauthtoken;
-			$data = array(
-				"content" => $TenCtext,
-			);
+				$the_result_10c = post_to_api('https://api.10centuries.org/content', $tencToken, $data);
+				$the_Array_10c = json_decode($the_result_10c, true);
 
-			$the_result_10c = post_to_api('https://api.10centuries.org/content', $tencToken, $data);
-			$the_Array_10c = json_decode($the_result_10c, true);
-
-			// Sets up a variable which contains a link to the 10C blurb
-			$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
-			echo $tenclink . " ";
-
+				// Sets up a variable which contains a link to the 10C blurb
+				$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
+				echo $tenclink . " ";
+			}
 			// 10Centuries PART OVER
 			
 			// Mastodon PART STARTS
+			if ($configs->postMastodon) {
+				$MastodonText = str_replace("\'", "'", $text);
+				$MastodonText = str_replace("\&quot;", "\"", $MastodonText);
+				$MastodonText = urlencode($MastodonText);
+				$mastodonToken = "bearer " . $configs->mastodonToken;
+				$mastodonUrl = "https://" . $configs->mastodonInstance . "/api/v1/statuses";
+				$data = array(
+					"status" => $MastodonText,
+				);
 
-			$MastodonText = str_replace("\'", "'", $text);
-			$MastodonText = str_replace("\&quot;", "\"", $MastodonText);
-			$MastodonText = urlencode($MastodonText);
-			$mastodonToken = "bearer " . $configs->mastodonToken;
-			$mastodonUrl = "https://" . $configs->mastodonInstance . "/api/v1/statuses";
-			$data = array(
-				"status" => $MastodonText,
-			);
+				$result_mastodon = post_to_api($mastodonUrl, $mastodonToken, $data);
+				$array_mastodon = json_decode($result_mastodon, true);
 
-			$result_mastodon = post_to_api($mastodonUrl, $mastodonToken, $data);
-			$array_mastodon = json_decode($result_mastodon, true);
-
-			// Sets up a variable linking to the toot
-			$mastodonlink = $array_mastodon['url'];
-			echo $mastodonlink . " ";
-
+				// Sets up a variable linking to the toot
+				$mastodonlink = $array_mastodon['url'];
+				echo $mastodonlink . " ";
+			}
 			// Mastodon ENDS
 
 			// Twitter part starts
+			if ($configs->postTwitter) {
+				require_once('codebird.php');
+				\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
+				$cb = \Codebird\Codebird::getInstance();
+				$cb->setToken($twUserKey, $twUserSecret);
+				
+				$params = array(
+				  'status' => $Twtext
+				);
+				$reply = $cb->statuses_update($params);
+				//$array_twit = json_decode($reply,true);
 
-			require_once('codebird.php');
-			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
-			$cb = \Codebird\Codebird::getInstance();
-			$cb->setToken($twUserKey, $twUserSecret);
-			
-			$params = array(
-			  'status' => $Twtext
-			);
-			$reply = $cb->statuses_update($params);
-			//$array_twit = json_decode($reply,true);
-
-			// Gives the twitter name if needed
-			$twScreen = $reply->user->screen_name;
-			$twid = $reply->id_str;
-			// Sets up a variable which provides a link to the posted tweet 
-			$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
-			echo $twitlink; 
+				// Gives the twitter name if needed
+				$twScreen = $reply->user->screen_name;
+				$twid = $reply->id_str;
+				// Sets up a variable which provides a link to the posted tweet 
+				$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
+				echo $twitlink; 
+			}
 			// Twitter part Over
 			
 			// ping microblog
-
-			ping_micro_blog($configs->siteUrl);
-
+			if ($configs->pingMicro) {
+				ping_micro_blog($configs->siteUrl);
+			}
 			// ping microblog over
 
 
@@ -190,7 +197,6 @@
 				'comment_ID' => $comment_id,
 				'known' => $knownlink,
 				'blurb' => $tenclink,
-				'known' => $knownlink,
 				'toot' => $mastodonlink,
 				'tweet' => $twitlink
 			);
@@ -198,8 +204,8 @@
 			array_unshift($wp_comments, $postarray);
 			$result = var_export($wp_comments, true); 
 			file_put_contents('text.txt', $result);
+			}
 		}
-	}
 ?>
 <html>
 <head>
