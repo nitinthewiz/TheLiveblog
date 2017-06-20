@@ -15,7 +15,7 @@ What it is and what it does
 
   This is a very simple liveblog. It posts to itself (sample at [Nitin Khanna's Liveblog](http://liveblog.nitinkhanna.com/) ) and to Twitter / 10Centuries / withKnown.
   It's not fancy, but it works. Beware, it's very easily hackable so make sure the passphrase you setup is strong.  
-  If a post is >140 chars, it truncates to 75 chars and adds your liveblog link to the end.
+  If a post is >140 chars, it splits the text to 140 char tweets and posts them as a twitter thread. This functionality is crude and often cuts in between words, so it might not look good. But it works.
 
 
 Setup
