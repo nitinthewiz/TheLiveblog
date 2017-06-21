@@ -95,9 +95,16 @@
 			}
 
 			if (strlen($text) > 140){
-				$TwURL = 'http://'. $configs->siteUrl.'#'.$comment_id;
-				$Twtext = substr($text, 0, 75);
-				$Twtext = $Twtext.'... '.$TwURL;
+				// $TwURL = 'http://'. $configs->siteUrl.'#'.$comment_id;
+				// $Twtext = substr($text, 0, 75);
+				// $Twtext = $Twtext.'... '.$TwURL;
+				$Twtext = "";
+				// $TwArray = explode(' ', $text, ceil(strlen($text)/140));
+				$TwArray = str_split($text, 140);
+				// echo ceil(strlen($text)/140);
+				// echo "<pre>";
+				// print_r($TwArray);
+				// echo "</pre>";
 			}
 			else{
 				$Twtext = $text;
@@ -128,7 +135,8 @@
 
 			// Sets up a variable which contains a link to the 10C blurb
 			$tenclink = "https://" . $the_Array_10c['data']['0']['urls']['full_url'];
-			echo $tenclink . " ";
+			echo $tenclink;
+			echo "<br>";
 
 			// 10Centuries PART OVER
 			
@@ -158,19 +166,46 @@
 			\Codebird\Codebird::setConsumerKey($twAPIkey, $twAPIsecret);
 			$cb = \Codebird\Codebird::getInstance();
 			$cb->setToken($twUserKey, $twUserSecret);
-			
-			$params = array(
-			  'status' => $Twtext
-			);
-			$reply = $cb->statuses_update($params);
+			if (!empty($Twtext)){
+				$params = array(
+					'status' => $Twtext
+				);
+				$reply = $cb->statuses_update($params);
+				// Gives the twitter name if needed
+				$twScreen = $reply->user->screen_name;
+				$twid = $reply->id_str;
+				// Sets up a variable which provides a link to the posted tweet 
+				$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
+				echo $twitlink; 
+			}
+			else{
+				$twitlink = "";
+				$replytwitid = "";
+				foreach ($TwArray as $key => $singletweet) {
+					if ($key == 0){
+						$params = array(
+							'status' => $singletweet
+						);
+						$reply = $cb->statuses_update($params);
+						// Gives the twitter name if needed
+						$twScreen = $reply->user->screen_name;
+						$twid = $reply->id_str;
+						// Sets up a variable which provides a link to the posted tweet 
+						$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
+						$replytwitid = $reply->id_str;
+					}
+					else{
+						$params = array(
+							'status' => $singletweet,
+							'in_reply_to_status_id' => $replytwitid
+						);
+						$reply = $cb->statuses_update($params);
+						$replytwitid = $reply->id_str;	
+					}
+				}
+				echo $twitlink;
+			}
 			//$array_twit = json_decode($reply,true);
-
-			// Gives the twitter name if needed
-			$twScreen = $reply->user->screen_name;
-			$twid = $reply->id_str;
-			// Sets up a variable which provides a link to the posted tweet 
-			$twitlink = "https://twitter.com/" . $twScreen . "/status/" . $twid;
-			echo $twitlink; 
 			// Twitter part Over
 			
 			// ping microblog
