@@ -116,7 +116,7 @@
 
 				$result = statusKnown($configs->knownUser, $configs->knownAPIkey, $configs->knownTwName, $configs->knownSite, $Knowntext);
 				$knownRes = json_decode($result, true);
-				$knownlink = $knownRes['location'];
+				$knownlink = str_replace("?t=json", "", $knownRes['location']);
 				echo $knownlink . " ";
 			}
 			// Known part over
