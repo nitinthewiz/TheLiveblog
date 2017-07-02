@@ -59,7 +59,10 @@ $configs = include('configs.php');
 			<?php
 			$wp_comments = eval("return " . $results . ";");
 			foreach ($wp_comments as $livepost) {
-
+				$known = '';
+				if (!empty($livepost['known'])) {
+					$blurb = "<a href='" . $livepost['known'] . "'><svg class=\"icon icon-known\"><use xlink:href=\"symbol-defs.svg#icon-known\"></use></svg></a> ";
+				}
 				$blurb = '';
 				if (!empty($livepost['blurb'])) {
 					$blurb = "<a href='" . $livepost['blurb'] . "'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a> ";
@@ -75,7 +78,7 @@ $configs = include('configs.php');
 				
 				echo "<tr>
 				<td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span>
-					<span class=\"syndic\">" . $blurb . $toot . $tweet . "</span>
+					<span class=\"syndic\">" . $known . $blurb . $toot . $tweet . "</span>
 				</td>
 				<td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a>
 				</td>
