@@ -61,7 +61,7 @@ $configs = include('configs.php');
 			foreach ($wp_comments as $livepost) {
 				$known = '';
 				if (!empty($livepost['known'])) {
-					$blurb = "<a href='" . $livepost['known'] . "'><svg class=\"icon icon-known\"><use xlink:href=\"symbol-defs.svg#icon-known\"></use></svg></a> ";
+					$known = "<a href='" . $livepost['known'] . "'><svg class=\"icon icon-known\"><use xlink:href=\"symbol-defs.svg#icon-known\"></use></svg></a> ";
 				}
 				$blurb = '';
 				if (!empty($livepost['blurb'])) {
