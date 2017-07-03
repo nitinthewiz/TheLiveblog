@@ -62,13 +62,14 @@
 		$text = $_POST['something'];
 		$pass = $_POST['nothing'];
 
-		if ($pass == $configs->password){
+		if (hash('sha256', $pass) === $configs->password) {
 			reset($wp_comments);
 			
 			$knownlink = '';
 			$twitlink = '';
 			$mastodonlink = '';
 			$tenclink = '';
+			$pnutlink = '';
 
 			$errors = array_filter($wp_comments);
 			if (empty($errors)) {
@@ -127,6 +128,26 @@
 				echo $knownlink . " ";
 			}
 			// Known part over
+
+			// pnut.io part starts
+
+			if ($configs->postPnut) {
+				$pnutText = str_replace("\'", "'", $text);
+				$pnutText = str_replace("\&quot;", "\"", $pnutText);
+				$pnutText = urlencode($pnutText);
+				$pnutToken = "Bearer " . $configs->pnutauthtoken;
+				$data = array(
+					"text" => $pnutText,
+				);
+
+				$the_result_pnut = post_to_api('https://api.pnut.io/v0/posts', $pnutToken, $data);
+				$the_array_pnut = json_decode($the_result_pnut, true);
+				$pnutlink = "https://posts.pnut.io/" . $the_array_pnut['data']['id'];
+				echo $pnutlink;
+				echo "<br>";
+			}
+
+			// pnut.io part ends
 			
 			// 10Centuries PART STARTS
 			if ($configs->postTenc) {
@@ -236,6 +257,7 @@
 				'comment_ID' => $comment_id,
 				'known' => $knownlink,
 				'blurb' => $tenclink,
+				'pnost' => $pnutlink,
 				'toot' => $mastodonlink,
 				'tweet' => $twitlink
 			);
