@@ -63,7 +63,7 @@ How to use
   
   If it fails, well bupkes.
   
-  The posts will be displayed on yoursite.com. Syndication links are displayed by icons - Known is the circle-K, 10C is the cup of coffee, Pnut the loudhailer[^1], Mastodon uses the mastodon.social instance loge, twitter (obvs) is the twitter icon.   
+  The posts will be displayed on yoursite.com. Syndication links are displayed by icons - Known is the circle-K, 10C is the cup of coffee, Pnut the loudhailer<sup>1</sup>, Mastodon uses the mastodon.social instance loge, twitter (obvs) is the twitter icon.   
 
 Issues
 ======
@@ -73,12 +73,7 @@ Issues
 
 ToDo
 ====
-
-[x] Not display syndication links where syndication has not taken place
-[x] Make the list of services configurable
-[x] Try to get this system working with some other services. Currently thinking of Pnut.
-[x] Try to extract syndication information from the post to withknown.
 [] I would like to apply the [indieweb mf2](https://indieweb.org/microformats) tags to the list of posts
 [] Create a proper 'settings' page which would save all the configuration items.
 
-[^1]: pnut's 'official' logo is awful. It is too wide, and the official 'icon' offering is just dreadful.
+<sup>1</sup>: pnut's 'official' logo is not good. It is too wide, and the official 'icon' offering looks bad at small sizes.
