@@ -6,7 +6,7 @@ return (object) array(
 	'siteUrl' => 'yourlivebloghere.com',			// the URL for your liveBlog
 	'siteTitle' => 'your site name',				// make it cool!
 	'siteDescription' => 'describe your site', 		// used for feeds
-	'password' => 'correct-horse-battery-staple',	// https://xkcd.com/936/
+	'password' => 'c87cbebfeebc05f7c54ac9336c4b4',	// see README
 	'timezone' => 'America/Vancouver',				// http://php.net/manual/en/timezones.php
 
 	// Config Block for Twitter
@@ -28,6 +28,10 @@ return (object) array(
 	'postTenc' => True,								// Set to False (boolean) to disable 10C crossposts
 	'tenCauthtoken' => 'yopEPNfq34',				// your 10Centuries.org API key. see 10C API guide.
 
+	// Config Block for Pnut.io
+	'postPnut' => True,
+	'pnutauthtoken' => '951a4bde7e',
+	
 	// Config Block for Mastodon
 	'postMastodon' => True,							// Set to False (boolean) to disable Mastodon crossposts
 	'mastodonInstance' => 'servername.ext',			// your Mastodon Instance
