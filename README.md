@@ -47,7 +47,7 @@ Setup
   $
   ```
 
-  The `-n` flag is _necessary,_ otherwise the hash will include the newline.
+  The `-n` flag is _necessary,_ otherwise the hash will include the newline. Do not copy the space and the "-" in the end. In the above example, only copy the "87cb...8590" part of the hash and paste that into the configs.php file.
 
   To set your configuration, just open `configs.php` -- all items are explained in the document, along with where to find them. Replace the dummy values with your own values, and choose which of the services you want to use with boolean `True` and `False`.
   
@@ -70,6 +70,7 @@ Issues
   1. Doesn't support hashtags in Share links (Hashtags and @-mentions work when posting)  
   2. Too much stuff is inline. This is a hack project. If you want to help me clean up the code, I'll accept all pull requests.  
   3. I created this when I was exporting content from the WP liveblog plugin because that one didn't support an infinite stream. So, there could be bugs because of my cleanup. Oh well.
+  4. The first time you create a post, there's an array error. This is normal and due to our lack of checking on the data file. The next time you create a post, this error should not show up.
 
 ToDo
 ====
