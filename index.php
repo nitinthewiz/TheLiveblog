@@ -11,7 +11,9 @@ $configs = include('configs.php');
 	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-	<link rel="alternate" type="application/rss+xml" title="<?= $configs->siteTitle ?>" href="/rss.php">
+	<link rel="alternate" type="application/rss+xml" title="<?= $configs->siteTitle ?> RSS" href="/rss.php">
+	<link rel="alternate" type="application/json" title="<?= $configs->siteTitle ?> JSON Feed" href="/jsonfeed.php">
+	
 	<script type="text/javascript">
 		function toTw(comment_ID){
 			var text = document.getElementById(comment_ID).innerHTML;
@@ -56,10 +58,37 @@ $configs = include('configs.php');
 			<tbody>
 			<?php
 			$wp_comments = eval("return " . $results . ";");
-			foreach ($wp_comments as $livepost)
-
-			echo "<tr><td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span><span class=\"syndic\"><a href='".$livepost['blurb']."'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a><a href='".$livepost['tweet']."'><svg class=\"icon icon-twitter\"><use xlink:href=\"symbol-defs.svg#icon-twitter\"></use></svg></a></span></td><td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a></td></tr>";
-			?>
+			foreach ($wp_comments as $livepost) {
+				$known = '';
+				if (!empty($livepost['known'])) {
+					$known = "<a href='" . $livepost['known'] . "'><svg class=\"icon icon-known\"><use xlink:href=\"symbol-defs.svg#icon-known\"></use></svg></a> ";
+				}
+				$pnost = '';
+				if (!empty($livepost['pnost'])) {
+					$pnost = "<a href='" . $livepost['pnost'] . "'><svg class=\"icon icon-bullhorn\"><use xlink:href=\"symbol-defs.svg#icon-bullhorn\"></use></svg></a> ";
+				}
+				$blurb = '';
+				if (!empty($livepost['blurb'])) {
+					$blurb = "<a href='" . $livepost['blurb'] . "'><svg class=\"icon icon-mug\"><use xlink:href=\"symbol-defs.svg#icon-mug\"></use></svg></a> ";
+				}
+				$toot = '';
+				if (!empty($livepost['toot'])) {
+					$toot = "<a href='" . $livepost['toot'] . "'><svg class=\"icon icon-masto\"><use xlink:href=\"symbol-defs.svg#icon-masto\"></use></svg></a> ";
+				}
+				$tweet ='';
+				if (!empty($livepost['tweet'])) {
+					$tweet = "<a href='" . $livepost['tweet'] . "'><svg class=\"icon icon-twitter\"><use xlink:href=\"symbol-defs.svg#icon-twitter\"></use></svg></a>";
+				}
+				
+				echo "<tr>
+				<td class=\"post\" id='".$livepost['comment_ID']."'><span class=\"content\">".$livepost['comment_content']."</span>
+					<span class=\"syndic\">" . $known . $pnost . $blurb . $toot . $tweet . "</span>
+				</td>
+				<td class=\"float-right\"><a href='$configs->siteUrl#".$livepost['comment_ID']."'>".$livepost['comment_date']."</a>
+				</td>
+				</tr>";
+			}
+				?>
 			</tbody>
 		</table>
 	</div>

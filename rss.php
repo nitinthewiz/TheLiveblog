@@ -26,11 +26,11 @@
 	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 	$configs = include('configs.php');
-	header("Content-Type: text/xml;charset=iso-8859-1");
+	header("Content-Type: text/xml;charset=utf-8");
 	// include 'wp_comments.php';
 	$results = file_get_contents('text.txt');
 	// echo $results;
-	echo "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n";
+	echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
 ?>
 <rss version="2.0">
 	<channel>
@@ -45,9 +45,9 @@
 				if($i==20) break;
 				echo "\n<item>\n";
 					echo "<title></title>\n";
-					echo "<link>$configs->siteUrl#".$livepost['comment_ID']."</link>\n";
-					echo "<guid>$configs->siteUrl#".$livepost['comment_ID']."</guid>\n";
-					echo "<pubDate>" . date( DATE_RFC822, strtotime($livepost['comment_date']) ) . "</pubDate>\n";
+					echo "<link>http://" . $configs->siteUrl . "#" . $livepost['comment_ID'] . "</link>\n";
+					echo "<guid>http://" . $configs->siteUrl . "#" . $livepost['comment_ID'] . "</guid>\n";
+					echo "<pubDate>" . date( DATE_RFC2822, strtotime($livepost['comment_date']) ) . "</pubDate>\n";
 					echo "<description>";
 						echo str_replace('&nbsp;',' ',$livepost['comment_content']);
 					echo "</description>\n";
