@@ -29,11 +29,11 @@ return (object) array(
 	'tenCauthtoken' => 'yopEPNfq34',				// your 10Centuries.org API key. see 10C API guide.
 
 	// Config Block for Pnut.io
-	'postPnut' => True,
+	'postPnut' => False,
 	'pnutauthtoken' => '951a4bde7e',
 	
 	// Config Block for Mastodon
-	'postMastodon' => True,							// Set to False (boolean) to disable Mastodon crossposts
+	'postMastodon' => False,							// Set to False (boolean) to disable Mastodon crossposts
 	'mastodonInstance' => 'servername.ext',			// your Mastodon Instance
 	'mastodonToken' => 'uWo42Bca91',				// get an auth code using Mastodon docs
 
